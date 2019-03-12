@@ -227,6 +227,15 @@
 // ////
 //Damage related
 
+/obj/vehicle/car/explode()
+	//stuns all passengers, causes burn damage
+	for(var/mob/living/carbon/human/C in buckled_mobs)
+		shake_camera(C, 3, 1)
+		if(ishuman(C))
+			C.electrify(C, 20)
+			C.Paralyse(3)
+	..()
+
 /obj/vehicle/car/Destroy()
 	qdel(spark_system)
 	spark_system = null

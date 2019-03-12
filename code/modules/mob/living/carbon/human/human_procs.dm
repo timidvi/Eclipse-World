@@ -20,4 +20,4 @@
 	M.emp_act(1)
 	to_chat(M, span("critical", "You've been electricuted!"))
 	M.burn_skin(damage)
-	return 1
+	return

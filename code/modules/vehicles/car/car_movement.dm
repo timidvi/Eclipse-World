@@ -40,6 +40,13 @@
 		var/turf/T = get_step(A, dir)
 		if(isturf(T))
 			A.Move(T)	//bump things away when hit
+	else
+		if(!emagged)
+			health -= move_speed * 10
+			playsound(src.loc, 'sound/vehicles/car_hit.ogg', 80, 0, 10)
+			stop_short()
+			turn_off()
+			healthcheck()
 
 	if(istype(A, /mob/living))
 		var/mob/living/M = A
@@ -51,7 +58,7 @@
 			M.emote("scream")
 		var/list/throw_dirs = list(1, 2, 4, 8, 5, 6, 9, 10)
 		if(!emagged)						// By the power of Bumpers TM, it won't throw them ahead of the quad's path unless it's emagged or the person turns.
-			health -= round(M.mob_size / 2)
+			health -= round(M.mob_size * 2)
 			throw_dirs -= dir
 			throw_dirs -= get_dir(M, src) //Don't throw it AT the quad either.
 			src.visible_message("<span class='danger'>The [src]'s safeties quickly activate upon hitting [A]!</span>")
@@ -64,7 +71,9 @@
 			return
 
 		else
-			health -= round(M.mob_size / 4) // Less damage if they actually put the point in to emag it.
+			health -= round(M.mob_size * 4) // Less damage if they actually put the point in to emag it.
+			src.visible_message("<span class='danger'>The [src]'s safeties quickly activate upon hitting [A]!</span>")
+
 			var/turf/T2 = get_step(A, pick(throw_dirs))
 			M.throw_at(T2, 1, 1, src)
 			playsound(src.loc, 'sound/vehicles/car_hit.ogg', 80, 0, 10)
@@ -72,9 +81,11 @@
 				var/mob/living/D = buckled_mobs[1]
 				to_chat(D, "<span class='danger'>You hit [M]!</span>")
 				add_attack_logs(D,M,"Ran over [M] with [src] driving as ([D]/[D.ckey]) in [src.loc] (emagged)")
+			stop_short()
+			turn_off()
 			healthcheck()
 			return
-	/*
+
 	//Eh, i'll figure this out. - Cass
 		if(istype(A, /obj/structure))
 			if(emagged)
@@ -113,7 +124,7 @@
 					return
 			else
 				return
-	*/
+
 	..()
 
 /obj/vehicle/car/RunOver(var/mob/living/carbon/human/H)
