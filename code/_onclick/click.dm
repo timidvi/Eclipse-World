@@ -125,6 +125,13 @@
 	// A is a turf or is on a turf, or in something on a turf (pen in a box); but not something in something on a turf (pen in a box in a backpack)
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
+	
+		if(ismob(A))
+			var/mob/living/M = A
+			if(isLivingSSD(M) && client && !client.can_harm_ssds() && !isAntag(src) && (W || (a_intent != I_GRAB && a_intent != I_HELP)))
+				to_chat(src, "<span class='warning'>AdminHelp (F1) to get permission before attacking players who are suffering from Space Sleep Disorder / disconnected from the game. Read the server rules for more details.</span>")
+				return
+	
 		if(A.Adjacent(src) || (W && W.attack_can_reach(src, A, W.reach)) ) // see adjacent.dm
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
