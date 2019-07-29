@@ -32,6 +32,8 @@
 	var/party_pass = " "
 	var/reg_error = "*Fields marked with an asterisk are required."
 
+	var/user_name
+
 /datum/nano_module/program/party_manager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
 	if(program)
@@ -49,7 +51,9 @@
 		can_login = 0
 	else
 		var/mob/living/carbon/human/H = user
-		data["authuser"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
+		user_name = I.registered_name
+		data["authuser"] = "[user_name] - [I.assignment ? I.assignment : "(Unknown)"]"
+
 		can_login = 1
 		user_uid = H.client.prefs.unique_id
 		data["user_uid"] = user_uid
@@ -205,7 +209,7 @@
 			EA.password = party_pass
 			EA.login = "[replacetext(lowertext(p_name), " ", "-")]@parties.nanotrasen.gov"
 
-			var/datum/party/P = create_new_party(p_name, p_desc, p_slogan, party_pass, user_uid)
+			var/datum/party/P = create_new_party(p_name, p_desc, p_slogan, party_pass, user_uid, user_name)
 			message_admins("Party created: [p_name].")
 
 			P.party_email = EA.login

@@ -77,7 +77,7 @@ var/global/list/political_parties = list()
 
 	return domain
 
-/proc/create_new_party(var/name, var/description, var/slogan, var/pass, var/leader_uid)
+/proc/create_new_party(var/name, var/description, var/slogan, var/pass, var/leader_uid, var/leader_name)
 
 	var/datum/party/P = new()
 	create_party_leader(name, leader_uid, P)

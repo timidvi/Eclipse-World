@@ -21,7 +21,6 @@
 	var/browser_url
 	var/interactive_website
 
-	var/party_cost
 
 
 
@@ -39,9 +38,21 @@
 		browser_url = current_website.name
 		interactive_website = current_website.interactive_website
 
-/datum/nano_module/nt_explorer/proc/browse_url(var/url)
-	current_website = locate(url) in websites
+/datum/nano_module/nt_explorer/proc/browse_url(var/datum/website/browsed_website, mob/user)
+	current_website = browsed_website
+	if(current_website.on_access(user))
+		browser_content = current_website.content
+		browser_title = current_website.title
+		browser_url = current_website.name
+		interactive_website = current_website.interactive_website
+
+	if(current_website.password)
+		var/entered_pass = input("This website requires a password to access. Please enter it below.", "Password Restricted", null, null) as text
+		if(!entered_pass || entered_pass != current_website.password)
+			current_website = locate(/datum/website/denied) in websites
+
 	fetch_website_data()
+
 
 /datum/nano_module/nt_explorer/proc/search(mob/user)
 	if(!websites.len)
@@ -56,12 +67,10 @@
 			break
 	if(!target)
 		target = locate(/datum/website/error) in websites
-	if(target.on_access(user))
-		browser_content = target.content
-		browser_title = target.title
-		browser_url = target.name
-		current_website = target
-		interactive_website = target.interactive_website
+
+	browse_url(target, user)
+	fetch_website_data()
+
 
 /datum/nano_module/nt_explorer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
@@ -94,3 +103,7 @@
 		. = 1
 		fetch_website_data()
 
+
+	if(href_list["Register"])
+		. = 1
+		if(interactive_website == "forum")
