@@ -50,10 +50,13 @@
 			else
 				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A>"
 
+	if(news_data.city_newspaper)
+		output += "<a href='byond://?src=\ref[src];open_city_news=1'>Show [using_map.station_name] News</A>"
+
 	if(client.check_for_new_server_news())
-		output += "<b><a href='byond://?src=\ref[src];shownews=1'>Show News</A> (NEW!)</b>"
+		output += "<b><a href='byond://?src=\ref[src];shownews=1'>Game Updates</A> (NEW!)</b>"
 	else
-		output += "<a href='byond://?src=\ref[src];shownews=1'>Show News</A>"
+		output += "<a href='byond://?src=\ref[src];shownews=1'>Game Updates</A>"
 
 	output +="<hr>"
 
@@ -71,6 +74,9 @@
 	output += "<hr>Current character: <b>[client.prefs.real_name]</b>, [client.prefs.economic_status]<br>"
 
 	output += "</div>"
+
+	if(news_data.city_newspaper && !client.seen_news)
+		show_latest_news(news_data.city_newspaper)
 
 
 	panel = new(src, "Welcome","Welcome, [client.prefs.real_name]", 500, 480, src)
@@ -138,7 +144,7 @@
 				to_chat(src,"<span class='notice'>Now teleporting.</span>")
 				observer.forceMove(O.loc)
 			else
-				to_chat(src,"<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>")
+				to_chat(src,"<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the city map.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			announce_ghost_joinleave(src)
@@ -177,7 +183,7 @@
 			usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
 			return
 		else if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
-			usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
+			usr << "<span class='danger'>The city is currently exploding. Joining would go poorly.</span>"
 			return
 
 		if(!is_alien_whitelisted(src, all_species[client.prefs.species]))
@@ -186,7 +192,7 @@
 
 		var/datum/species/S = all_species[client.prefs.species]
 		if(!(S.spawn_flags & SPECIES_CAN_JOIN))
-			src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+			src << alert("Your current species, [client.prefs.species], is not available for play on the city.")
 			return 0
 
 		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
@@ -415,7 +421,7 @@
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
-		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
+		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived to the city"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.real_name
@@ -492,6 +498,9 @@
 	new_character.dna.ready_dna(new_character)
 	new_character.dna.b_type = client.prefs.b_type
 	new_character.sync_organ_dna()
+	
+	new_character.unique_id = client.prefs.unique_id
+	
 	if(client.prefs.disabilities)
 		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
 		new_character.dna.SetSEState(GLASSESBLOCK,1,0)
@@ -529,6 +538,7 @@
 /mob/new_player/proc/close_spawn_windows()
 
 	src << browse(null, "window=latechoices") //closes late choices window
+	src << browse(null, "window=News") //closes news window
 	//src << browse(null, "window=playersetup") //closes the player setup window
 	panel.close()
 

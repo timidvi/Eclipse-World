@@ -122,6 +122,8 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	to_chat(world, "[get_president_info()]")
+
 	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them.
@@ -401,17 +403,24 @@ var/global/datum/controller/gameticker/ticker
 
 	if(!config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
 		world << "<H2>This round was not canon. It was all a dream.</H2>"
+		roll_titles()
 	else
 		world << "<H2>This round was canon.</H2>"
 
 		//saves all department accounts
 		persistent_economy.save_accounts()
 
+		//save politics related data
+		SSelections.save_data.save_candidates()
+		
+		//save news
+		news_data.save_main_news()
+
 		//saves all characters
 		for (var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
 			H.save_mob_to_prefs()
 
-	roll_titles()
+
 	for(var/mob/Player in player_list)
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)

@@ -39,7 +39,7 @@
 		usr << "<font color='red'>The round is not canon!</font>"
 		return 0
 
-	for (var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
+	for(var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
 		H.save_mob_to_prefs()
 		message_admins("Admin [key_name_admin(usr)] has saved all characters.", 1)
 
@@ -81,10 +81,27 @@
 	set desc = "View all department accounts, edit vars, edit taxes, etc."
 	set category = "Persistence"
 
+	debug_variables(persistent_economy)
+
+
+/client/proc/debug_politics()
+	set category = "Persistence"
+	set name = "Debug Politics"
+	set desc = "Let's get into the nepotism."
+
 	if(!holder)
 		usr << "<font color='red'>Only admins can use this command!</font>"
 		return 0
 
-	debug_variables(persistent_economy)
+	debug_variables(SSelections)
 
+/client/proc/debug_news()
+	set category = "Persistence"
+	set name = "Debug News"
+	set desc = "Propaganda begins here."
 
+	if(!holder)
+		usr << "<font color='red'>Only admins can use this command!</font>"
+		return 0
+
+	debug_variables(news_data)
