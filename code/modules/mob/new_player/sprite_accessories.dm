@@ -204,6 +204,10 @@
 		hair_type = HAIR_SHORT
 		icon_state = "hair_parted"
 
+	partedalt
+		name = "Parted Alt"
+		icon_state = "hair_partedalt"
+
 	pompadour
 		name = "Pompadour"
 		hair_type = HAIR_SHORT
@@ -411,6 +415,10 @@
 		name = "Feather"
 		hair_type = HAIR_MEDIUM
 		icon_state = "hair_feather"
+
+	glossy
+		name = "Glossy"
+		icon_state = "hair_glossy"
 
 	hitop
 		name = "Hitop"
@@ -756,15 +764,16 @@
 	mohawkunshaven
 		name = "Unshaven Mohawk"
 		icon_state = "hair_unshaven_mohawk"
-
+/*
 	undercut4
 		name = "Regulation Undercut"
 		icon_state = "hair_undercut4"
-
+*/
+/*
 	slick
 		name = "Slick"
 		icon_state = "hair_slick"
-
+*/
 	messyhair
 		name = "All Up"
 		icon_state = "hair_messyhair"
@@ -812,6 +821,84 @@
 	proper
 		name = "Proper"
 		icon_state = "hair_proper"
+
+	newyou
+		name = "New You"
+		icon_state = "hair_newyou"
+
+	himeup
+		name = "Hime Updo"
+		icon_state = "hair_himeup"
+
+	antenna
+		name = "Antenna"
+		icon_state = "hair_antenna"
+
+	sidetail
+		name = "Side Pony"
+		icon_state = "hair_sidetail"
+
+	sidetail2
+		name = "Side Pony 2"
+		icon_state = "hair_sidetail2"
+
+	front_braid
+		name = "Braided front"
+		icon_state = "hair_braidfront"
+
+	protagonist
+		name = "Slightly Long"
+		icon_state = "hair_protagonist"
+
+	lowbraid
+		name = "Low Braid"
+		icon_state = "hair_hbraid"
+
+	braidtail
+		name = "Braided Tail"
+		icon_state = "hair_braidtail"
+
+	keanu
+		name = "Keanu Hair"
+		icon_state = "hair_keanu"
+
+	business
+		name = "Business Hair"
+		icon_state = "hair_business"
+
+	business2
+		name = "Business Hair 2"
+		icon_state = "hair_business2"
+
+	business3
+		name = "Business Hair 3"
+		icon_state = "hair_business3"
+
+	business4
+		name = "Business Hair 4"
+		icon_state = "hair_business4"
+
+	bunhead
+		name = "Bun Head "
+		icon_state = "hair_bunhead"
+
+	pixie
+		name = "Pixie Cut"
+		icon_state = "hair_pixie"
+
+	sidepartlongalt
+		name = "Long Side Part"
+		icon_state = "hair_longsidepart"
+
+	miles
+		name = "Miles Hair"
+		icon_state = "hair_miles"
+
+	vivi
+		name = "Vivi"
+		icon_state = "hair_vivi"
+
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /

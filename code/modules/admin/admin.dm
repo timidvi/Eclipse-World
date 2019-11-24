@@ -70,6 +70,7 @@ proc/admin_notice(var/message, var/rights)
 
 	if(M.client)
 		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
+		body += "\ <A HREF='?src=\ref[src];togglessdguard=\ref[M]'>Toggle SSD Guard</A> "
 		var/muted = M.client.prefs.muted
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
@@ -869,8 +870,6 @@ proc/admin_notice(var/message, var/rights)
 		return
 
 	world.visibility = !(world.visibility)
-	post_webhook_event(WEBHOOK_ADMIN, list("title"="Hub visibility has been toggled", "message"="**[key_name(src)]**"))
-	discord_bot.send_to_admins("[key_name(src)]")
 	log_admin("[key_name(usr)] toggled hub visibility.")
 	message_admins("[key_name_admin(usr)] toggled hub visibility.  The server is now [world.visibility ? "visible" : "invisible"] ([world.visibility]).", 1)
 	feedback_add_details("admin_verb","THUB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc

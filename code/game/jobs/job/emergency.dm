@@ -4,7 +4,7 @@
 	faction = "City"
 	head_position = 1
 	department_flag = ENGSEC
-	department = "Emergency and Maintenance"
+	department = "City Council"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"
@@ -12,7 +12,7 @@
 	idtype = /obj/item/weapon/card/id/engineering/head
 	req_admin_notify = 1
 	email_domain = "cityworks.gov.nt"
-	wage = 480
+	wage = 330
 
 	minimum_character_age = 30
 	ideal_character_age = 50

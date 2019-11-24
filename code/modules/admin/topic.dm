@@ -1015,6 +1015,28 @@
 		log_admin("[key_name(usr)] sent [key_name(M)] to the prison station.")
 		message_admins("<font color='blue'>[key_name_admin(usr)] sent [key_name_admin(M)] to the prison station.</font>", 1)
 
+
+	else if(href_list["togglessdguard"])
+		var/mob/M = locate(href_list["togglessdguard"])
+
+		if(!check_rights(R_ADMIN))
+			return
+
+		if(!M.client)
+			to_chat(usr, "<span class='warning'>[M] doesn't have an attached client.</span>")
+			return
+
+		var/onoff = "DISABLED"
+		if(M.client.bypass_ssd_guard)
+			M.client.bypass_ssd_guard = FALSE
+			onoff = "ENABLED"
+		else
+			M.client.bypass_ssd_guard = TRUE
+			to_chat(M, "<span class='warning'>You have been given temporary permission to interact with SSD players.</span>")
+
+		log_admin("[key_name(usr)] has [onoff] SSD Guard for [key_name(M)].")
+		message_admins("[key_name_admin(usr)] has [onoff] SSD Guard for [key_name(M)]")
+
 	else if(href_list["tdome1"])
 		if(!check_rights(R_FUN))	return
 
@@ -1222,7 +1244,6 @@
 			for(var/client/X in admins)
 				if((R_ADMIN|R_MOD|R_CBIA|R_SERVER) & X.holder.rights)
 					to_chat(X, take_msg)
-			post_webhook_event(WEBHOOK_ADMIN_PM, list("title"="Help is nolonger needed", "message"="Request for Help from **[key_name(M)]** is being tended to by **[key_name(usr)]**."))
 			to_chat(M, "<span class='notice'><b>Your adminhelp is being attended to by [usr.client]. Thanks for your patience!</b></span>")
 		else
 			to_chat(usr, "<span class='warning'>Unable to locate mob.</span>")

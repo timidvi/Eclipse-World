@@ -229,6 +229,8 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	src.plane = initial(plane) //resets the plane of the object when it's picked up from a table. might have other consequences
 
 	//If it's a certain type of object, log it for admins, quite useful in some situations.
+	//todo, create an attack log proc that's that's a lot shorter.
+	//This technically isn't on pickup, this is if you literally try to interact with it at all. attack_hand() versus pickup()
 	if(istype(src, /obj/item/weapon/melee))
 		usr.attack_log += "\[[time_stamp()]\] <font color='blue'>Has picked up the melee object <b>[src]</b> from [src.loc.loc].</font>"
 
@@ -777,6 +779,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(!inhands)
 		apply_blood(standing)			//Some items show blood when bloodied
 		apply_accessories(standing)		//Some items sport accessories like webbing
+		apply_polychromic(standing)		//polychromic clothing
 
 	//Return our icon
 	return standing
@@ -858,6 +861,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/apply_accessories(var/image/standing)
 	return standing
 
+//STUB
+/obj/item/proc/apply_polychromic(var/image/standing)
+	//visible_message("you fucked up, Nestor")
+	return standing
 /*
  *	Assorted tool procs, so any item can emulate any tool, if coded
 */

@@ -4,6 +4,7 @@
 	hitsound = "swing_hit"
 	var/can_cleave = FALSE // If true, a 'cleaving' attack will occur.
 	var/cleaving = FALSE // Used to avoid infinite cleaving.
+	var/digspeed // I'm a hack
 
 /obj/item/weapon/Bump(mob/M as mob)
 	spawn(0)
@@ -58,3 +59,10 @@
 /obj/item/weapon/proc/cleave_visual(var/mob/living/user, var/mob/living/target)
 	var/obj/effect/temporary_effect/cleave_attack/E = new(get_turf(src))
 	E.dir = get_dir(user, target)
+
+/obj/item/weapon/pickup(mob/living/user)
+	..()
+	weapondraw(src, user)
+
+/obj/item/weapon/proc/weapondraw(obj/item/weapon/W, mob/living/user)
+	return

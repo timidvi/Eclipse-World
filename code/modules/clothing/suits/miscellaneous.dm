@@ -288,6 +288,12 @@ obj/item/clothing/suit/kimono
 	icon_state = "kimono"
 	addblends = "kimono_a"
 
+obj/item/clothing/suit/kamishimo
+	name = "kamishimo"
+	desc = "Traditional Japanese menswear."
+	icon_state = "kamishimo"
+	index = 1
+
 /*
  * coats
  */
@@ -295,6 +301,14 @@ obj/item/clothing/suit/kimono
 	name = "leather coat"
 	desc = "A long, thick black leather coat."
 	icon_state = "leathercoat_alt"
+	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight, /obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
+	item_state_slots = list(slot_r_hand_str = "leather_jacket", slot_l_hand_str = "leather_jacket")
+	flags_inv = HIDEHOLSTER
+
+/obj/item/clothing/suit/storage/toggle/coat
+	name = "coat"
+	desc = "Your typical coat, this particular brand has a lot of different colors."
+	icon_state = "jacket_chrom"
 	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight, /obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
 	item_state_slots = list(slot_r_hand_str = "leather_jacket", slot_l_hand_str = "leather_jacket")
 	flags_inv = HIDEHOLSTER
@@ -336,6 +350,15 @@ obj/item/clothing/suit/kimono
 	item_state_slots = list(slot_r_hand_str = "leather_jacket", slot_l_hand_str = "leather_jacket")
 	flags_inv = HIDEHOLSTER
 
+/obj/item/clothing/suit/storage/toggle/cardigan
+	name = "cardigan"
+	desc = "A cozy cardigan in a classic style."
+	icon_state = "cardigan"
+	addblends = "cardigan_a"
+	flags_inv = HIDEHOLSTER
+	index = 1
+
+
 /obj/item/clothing/suit/storage/trench
 	name = "brown trenchcoat"
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. The coat appears to have its kevlar lining removed."
@@ -362,9 +385,35 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	name = "cowboy duster"
 	desc = "A duster commonly seen on cowboys from Earth's late 1800's."
 	icon_state = "duster"
+	index = 1
+
 	blood_overlay_type = "coat"
 	allowed = list(/obj/item/weapon/tank/emergency/oxygen, /obj/item/device/flashlight,/obj/item/weapon/gun/energy,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	flags_inv = HIDEHOLSTER
+
+/obj/item/clothing/suit/tailcoat
+	name = "tailcoat"
+	desc = "A fancy victorian tailcoat."
+	icon_state = "tailcoat"
+	index = 1
+
+
+/obj/item/clothing/suit/tailcoat/ladies
+	name = "ladies victorian coat"
+	desc = "A fancy victorian coat."
+	icon_state = "ladiesvictoriancoat"
+
+/obj/item/clothing/suit/tailcoat/ladies/red
+	name = "ladies red victorian coat"
+	icon_state = "ladiesredvictoriancoat"
+
+
+/obj/item/clothing/suit/tailcoat/mayor
+	name = "mayor's tailcoat"
+	desc = "A fancy blue and gold pinstripe tailcoat. For when you wanted to be something more than the mayoral corps but had to settle in the end...."
+	icon_state = "mayortailcoat"
+	index = null
+
 /*
  * stripper
  */
@@ -862,7 +911,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	icon_state = "PresidentJacket"
 	item_state_slots = list(slot_r_hand_str = "PresidentJacket", slot_l_hand_str = "PresidentJacket")
 	flags_inv = HIDEHOLSTER
-	open = 0
+	open = 1
 
 /*
  * Department Jackets

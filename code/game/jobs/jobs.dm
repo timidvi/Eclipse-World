@@ -65,9 +65,9 @@ var/list/assistant_occupations = list(
 
 
 var/list/gov_positions = list(
-	"Nanotrasen CEO",
+	"NanoTrasen Sector Administrator",
 	"Nanotrasen Representative",
-	"CBIA Agent",
+	"PDSI Agent",
 	"President"
 )
 
@@ -106,7 +106,7 @@ var/list/science_positions = list(
 	"Geneticist",	//Part of both medical and science
 	"Roboticist",
 	"Xenobiologist",
-	"Science Intern"
+	"Research Assistant"
 )
 
 //BS12 EDIT
