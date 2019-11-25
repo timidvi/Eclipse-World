@@ -87,7 +87,7 @@ var/list/whitelist = list()
 	return 1
 
 /proc/load_hardwhitelist()
-	var/text = file2text("config/hardwhitelist.txt")
+	var/text = file2text("config/jobwhitelist.txt")
 	if (!text)
 		log_misc("Failed to load config/hardwhitelist.txt")
 	else
@@ -114,11 +114,14 @@ var/list/whitelist = list()
 	//If we have a loaded file, search it
 	if(jobs.hard_whitelisted)
 		for (var/s in hard_whitelist)
+			if(findtext(s,"[lowertext(M.ckey)] - [lowertext(jobs.title)]"))
+				return 1
 			if(findtext(s,"[M.ckey] - [jobs.title]"))
+				return 1
+			if(findtext(s,"[M.ckey] - [lowertext(jobs.title)]"))
 				return 1
 			if(findtext(s,"[M.ckey] - All"))
 				return 1
-
 
 
 /proc/get_available_classes(client/C)

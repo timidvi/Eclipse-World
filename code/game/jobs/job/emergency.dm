@@ -27,7 +27,7 @@
 			            access_heads, access_construction, access_sec_doors,
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload, access_medical, access_medical_equip)
 	alt_titles = list("Batallion Chief","Fire Commissioner")
-	minimal_player_age = 7
+	//minimal_player_age = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
 /*
@@ -48,7 +48,7 @@
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	alt_titles = list("Firefighter/EMT")
 	minimum_character_age = 18
-	minimal_player_age = 3
+	//minimal_player_age = 3
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 */
 /datum/job/atmos
@@ -68,7 +68,7 @@
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 
-	minimal_player_age = 3
+	//minimal_player_age = 3
 	minimum_character_age = 18
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos

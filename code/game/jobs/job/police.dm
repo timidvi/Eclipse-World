@@ -19,8 +19,8 @@
 	minimal_access = list(access_security, access_warrant, access_eva, access_sec_doors, access_brig, access_armory,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
-	minimum_character_age = 30
-	minimal_player_age = 14
+	minimum_character_age = 27
+	hard_whitelisted = 1
 
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
 	alt_titles = list("Head of Police", "Police Commander", "Police Commissioner", "Police Chief")
@@ -40,7 +40,7 @@
 	wage = 95
 	access = list(access_security, access_bodyguard, access_warrant, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_warrant, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
-	minimal_player_age = 5
+	//minimal_player_age = 5
 	minimum_character_age = 28
 
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
@@ -61,7 +61,7 @@
 	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks, access_medical)
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
 	wage = 85
-	minimal_player_age = 3
+	//minimal_player_age = 3
 	minimum_character_age = 25
 
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
@@ -82,7 +82,7 @@
 	wage = 40
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
-	minimal_player_age = 3
+	//minimal_player_age = 3
 	minimum_character_age = 23
 
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
@@ -104,7 +104,7 @@
 	wage = 100
 	access = list(access_prosecutor, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_prosecutor, access_sec_doors, access_heads)
-//	minimal_player_age = 7 (need more prostitut-- prosecutors.)
+//	//minimal_player_age = 7 (need more prostitut-- prosecutors.)
 	minimum_character_age = 21
 	alt_titles = list("Prosecutor","Prosecuting Attorney","Prosecution Officer","Prosecuting Lawyer")
 
@@ -122,7 +122,7 @@
 	supervisors = "the mayor or the judge"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/silver/secretary
-	minimal_player_age = 5
+	//minimal_player_age = 5
 	wage = 90
 	minimum_character_age = 25
 	access = list(access_heads, access_bodyguard, access_keycard_auth, access_security, access_sec_doors)

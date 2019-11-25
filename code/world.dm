@@ -560,9 +560,9 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>The World Server Redux | Partially persistent city roleplay</b> - <b>[station_name()]</b>";
-	s += " | DEVELOPMENT MODE ("
-	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
+	s += "<b>Eclipse - World Server Edition | Partially persistent city roleplay</b> - <b>[station_name()]</b>";
+	s += " | Species customization - HRP - Custom races ("
+	s += "<a href=\"https://discord.gg/xuS4t9U\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
 	s += "DISCORD"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
@@ -599,9 +599,9 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 	if (config && config.hostedby)
-		features += "hosted by <b>[config.hostedby]</b>"
+		features += "hosted by <b>Eclipse</b>"
 
-	s += "<img src=\"https://i.imgur.com/RGXrBHu.gif\">" //Banner image
+	s += "<img src=\"http://www.eclipse-station.space/favicon.ico\">" //Banner image
 
 	if (features)
 		s += ": [jointext(features, ", ")]"

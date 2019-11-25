@@ -7,6 +7,10 @@
 		usr << "<span class='warning'>Speech is currently admin-disabled.</span>"
 		return
 
+	if(!is_key_whitelisted(key))
+		src << "Non-whitelisted users may not use OOC. Join our discord server at https://discord.gg/xuS4t9U to get whitelisted."
+		return
+
 	if(!mob)	return
 	if(IsGuestKey(key))
 		src << "Guests may not use OOC."

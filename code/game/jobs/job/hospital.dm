@@ -20,9 +20,11 @@
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks, access_maint_tunnels)
 
-	minimum_character_age = 30
-	minimal_player_age = 3
+	minimum_character_age = 27
+	////minimal_player_age = 3
 	ideal_character_age = 50
+
+	hard_whitelisted = 1
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	alt_titles = list(
@@ -69,7 +71,7 @@
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
 	alt_titles = list("Pharmacist")
 
-	minimal_player_age = 3
+	//minimal_player_age = 3
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 

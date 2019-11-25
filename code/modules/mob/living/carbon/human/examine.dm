@@ -100,7 +100,9 @@
 		CRASH("Gender datum was null; key was '[((skip_gear & EXAMINE_SKIPJUMPSUIT) && (skip_body & EXAMINE_SKIPFACE)) ? PLURAL : gender]'")
 
 	if(!((skip_gear & EXAMINE_SKIPJUMPSUIT) && (skip_body & EXAMINE_SKIPFACE)))
-		if(looks_synth)
+		if(custom_species)
+			msg += ", a <b>[src.custom_species]</b>"
+		else if(looks_synth)
 			var/use_gender = "a synthetic"
 			if(gender == MALE)
 				use_gender = "an android"

@@ -1179,14 +1179,14 @@
 	//A slew of bits that may be affected by our species change
 	regenerate_icons()
 
-
+/*
 	if(species)
 		if(mind)
 			apply_traits()
 		return 1
 	else
 		return 0
-
+*/
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
 	set name = "Write in blood"

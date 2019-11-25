@@ -14,7 +14,7 @@
 	min_age = 12
 	max_age = 45
 
-	additional_wage = 6
+	economic_modifier = 6
 
 	health_hud_intensity = 3
 
@@ -27,7 +27,7 @@
 	flesh_color = "#5F7BB0"
 	base_color = "#001144"
 	tail = "seromitail"
-	tail_hair = "feathers"
+	//tail_hair = "feathers" //TESHARI TEMPORARY REMOVAL
 	reagent_tag = IS_TESHARI
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
@@ -43,6 +43,7 @@
 
 	slowdown = -1
 	snow_movement = -2	// Ignores light snow
+	item_slowdown_mod = 2	// Tiny birds don't like heavy things
 	total_health = 50
 	brute_mod = 1.35
 	burn_mod =  1.35
@@ -56,7 +57,7 @@
 
 	ambiguous_genders = TRUE
 
-	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
@@ -104,6 +105,7 @@
 	has_organ = list(
 		O_HEART =    /obj/item/organ/internal/heart,
 		O_LUNGS =    /obj/item/organ/internal/lungs,
+		O_VOICE = 	/obj/item/organ/internal/voicebox,
 		O_LIVER =    /obj/item/organ/internal/liver,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		O_BRAIN =    /obj/item/organ/internal/brain,
@@ -119,6 +121,11 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/sonar_ping,
 		/mob/living/proc/hide
+		)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = -3,
+		/datum/mob_descriptor/build = -3
 		)
 
 /datum/species/teshari/equip_survival_gear(var/mob/living/carbon/human/H)

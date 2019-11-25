@@ -69,6 +69,7 @@ datum/preferences
 	var/r_synth							//Used with synth_color to color synth parts that normaly can't be colored.
 	var/g_synth							//Same as above
 	var/b_synth							//Same as above
+	var/synth_markings = 1				//Enable/disable markings on synth
 
 		//Some faction information.
 	var/home_system = "Vetra"           //System of birth.
@@ -123,6 +124,8 @@ datum/preferences
 
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
+
+	var/list/body_descriptors = list()
 
 	var/med_record = ""
 	var/sec_record = ""

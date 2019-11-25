@@ -8,7 +8,7 @@
 	selection_color = "#3F823F"
 	supervisors = "your laws"
 	req_admin_notify = 1
-	minimal_player_age = 7
+	minimal_player_age = 0
 	account_allowed = 0
 	wage = 0
 

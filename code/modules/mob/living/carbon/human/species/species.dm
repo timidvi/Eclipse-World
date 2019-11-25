@@ -16,7 +16,6 @@
 	var/speech_bubble_appearance = "normal"					// Part of icon_state to use for speech bubbles when talking.	See talk.dmi for available icons.
 	var/fire_icon_state = "humanoid"						// The icon_state used inside OnFire.dmi for when on fire.
 	var/suit_storage_icon = 'icons/mob/belt_mirror.dmi'		// Icons used for worn items in suit storage slot.
-	var/bandages_icon
 
 	// Damage overlay and masks.
 	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
@@ -32,7 +31,7 @@
 	var/tail_animation										// If set, the icon to obtain tail animation states from.
 	var/tail_hair
 
-	var/icon_scale = 1										// Makes the icon larger/smaller. (taller)
+	var/icon_scale = 1										// Makes the icon larger/smaller.
 	var/icon_width = 1										// Makes the icon larger/smaller. (wider)
 
 	var/race_key = 0										// Used for mob icon cache string.
@@ -43,29 +42,36 @@
 	var/short_sighted										// Permanent weldervision.
 	var/blood_volume = 560									// Initial blood volume.
 	var/bloodloss_rate = 1									// Multiplier for how fast a species bleeds out. Higher = Faster
-	var/hunger_factor = DEFAULT_HUNGER_FACTOR 				// Multiplier for hunger.
+	var/hunger_factor = 0.05								// Multiplier for hunger.
 	var/thirst_factor = DEFAULT_THIRST_FACTOR 				// Multiplier for thirst.
 	var/active_regen_mult = 1								// Multiplier for 'Regenerate' power speed, in human_powers.dm
 
 	var/taste_sensitivity = TASTE_NORMAL					// How sensitive the species is to minute tastes.
 
+
+	var/bandages_icon
 	var/min_age = 17
 	var/max_age = 70
 
 	// Language/culture vars.
 	var/default_language = LANGUAGE_GALCOM					// Default language is used when 'say' is used without modifiers.
 	var/language = LANGUAGE_GALCOM							// Default racial language, if any.
-	var/species_language = LANGUAGE_GALCOM					// Used on the Character Setup screen
+	var/list/species_language = list(LANGUAGE_GALCOM)		// Used on the Character Setup screen
 	var/list/secondary_langs = list()						// The names of secondary languages that are available to this species.
-	var/list/speech_sounds									// A list of sounds to potentially play when speaking.
-	var/list/speech_chance									// The likelihood of a speech sound playing.
+	var/list/speech_sounds = list()							// A list of sounds to potentially play when speaking.
+	var/list/speech_chance = list()							// The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0							// How many secondary languages are available to select at character creation
 	var/name_language = LANGUAGE_GALCOM						// The language to use when determining names for this species, or null to use the first name/last name generator
 
+	// The languages the species can't speak without an assisted organ.
+	// This list is a guess at things that no one other than the parent species should be able to speak
+	var/list/assisted_langs = list(LANGUAGE_EAL, LANGUAGE_SKRELLIAN, LANGUAGE_SKRELLIANFAR, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX)
+
 	//Soundy emotey things.
 	var/scream_verb = "screams"
-	var/male_scream_sound		= 'sound/voice/human/man_scream.ogg'
-	var/female_scream_sound	= 'sound/voice/human/woman_scream.ogg'
+	/* ECLIPSE EDIT - Re-added and updated with new GOON CODE sounds. Check the License file for details. - HTG */
+	var/male_scream_sound = 'sound/goonstation/voice/male_scream.ogg'
+	var/female_scream_sound = 'sound/goonstation/voice/female_scream.ogg'
 	var/male_cough_sounds = list('sound/effects/mob_effects/m_cougha.ogg','sound/effects/mob_effects/m_coughb.ogg', 'sound/effects/mob_effects/m_coughc.ogg')
 	var/female_cough_sounds = list('sound/effects/mob_effects/f_cougha.ogg','sound/effects/mob_effects/f_coughb.ogg')
 	var/male_sneeze_sound = 'sound/effects/mob_effects/sneeze.ogg'
@@ -78,13 +84,14 @@
 		/datum/unarmed_attack/bite
 		)
 	var/list/unarmed_attacks = null							// For empty hand harm-intent attack
-	var/brute_mod =			1								// Physical damage multiplier.
-	var/burn_mod =			1								// Burn damage multiplier.
-	var/oxy_mod =			1								// Oxyloss modifier
-	var/toxins_mod =		1								// Toxloss modifier
-	var/radiation_mod =		1								// Radiation modifier
-	var/flash_mod =			1								// Stun from blindness modifier.
-	var/chemOD_mod =		1								// Damage modifier for overdose
+	var/brute_mod =     1									// Physical damage multiplier.
+	var/burn_mod =      1									// Burn damage multiplier.
+	var/oxy_mod =       1									// Oxyloss modifier
+	var/toxins_mod =    1									// Toxloss modifier
+	var/radiation_mod = 1									// Radiation modifier
+	var/flash_mod =     1									// Stun from blindness modifier.
+	var/sound_mod =     1									// Stun from sounds, I.E. flashbangs.
+	var/chemOD_mod =	1									// Damage modifier for overdose
 	var/vision_flags = SEE_SELF								// Same flags as glasses.
 
 	// Death vars.
@@ -96,6 +103,7 @@
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
 	var/knockout_message = "has been knocked unconscious!"
 	var/cloning_modifier = /datum/modifier/cloning_sickness
+	var/can_drive = 1
 
 	// Environment tolerance/life processes vars.
 	var/reagent_tag											//Used for metabolizing reagents.
@@ -149,6 +157,7 @@
 
 	var/metabolic_rate = 1
 
+
 	var/uses_calories = TRUE
 
 	var/max_calories = WEIGHT_MAX // Above this, heart attacks will happen
@@ -160,13 +169,14 @@
 	var/fat_calories = WEIGHT_FAT
 	var/obese_calories = WEIGHT_OBESE
 
+
 	// HUD data vars.
 	var/datum/hud_data/hud
 	var/hud_type
 	var/health_hud_intensity = 1							// This modifies how intensely the health hud is colored.
 
 	// Body/form vars.
-	var/list/inherent_verbs									// Species-specific verbs.
+	var/list/inherent_verbs = list()									// Species-specific verbs.
 	var/has_fine_manipulation = 1							// Can use small items.
 	var/siemens_coefficient = 1								// The lower, the thicker the skin and better the insulation.
 	var/darksight = 2										// Native darksight distance.
@@ -190,14 +200,13 @@
 	var/gluttonous											// Can eat some mobs. 1 for mice, 2 for monkeys, 3 for people.
 
 	var/rarity_value = 1									// Relative rarity/collector value for this species.
-	var/additional_wage = 0									// How much extra money this species makes
-	var/can_drive = 1
-//	var/can_use_machinery = 1 //TODO
+	var/economic_modifier = 2								// How much money this species makes
 
 	// Determines the organs that the species spawns with and
 	var/list/has_organ = list(								// which required-organ checks are conducted.
 		O_HEART =		/obj/item/organ/internal/heart,
 		O_LUNGS =		/obj/item/organ/internal/lungs,
+		O_VOICE = 		/obj/item/organ/internal/voicebox,
 		O_LIVER =		/obj/item/organ/internal/liver,
 		O_KIDNEYS =	/obj/item/organ/internal/kidneys,
 		O_BRAIN =		/obj/item/organ/internal/brain,
@@ -205,6 +214,7 @@
 		O_EYES =		 /obj/item/organ/internal/eyes
 		)
 	var/vision_organ										// If set, this organ is required for vision. Defaults to "eyes" if the species has them.
+	var/dispersed_eyes            // If set, the species will be affected by flashbangs regardless if they have eyes or not, as they see in large areas.
 
 	var/list/has_limbs = list(
 		BP_TORSO =	list("path" = /obj/item/organ/external/chest),
@@ -230,11 +240,25 @@
 
 	var/pass_flags = 0
 
+	var/list/descriptors = list(
+		/datum/mob_descriptor/height,
+		/datum/mob_descriptor/build
+		)
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
 	else
 		hud = new()
+
+	// Prep the descriptors for the species
+	if(LAZYLEN(descriptors))
+		var/list/descriptor_datums = list()
+		for(var/desctype in descriptors)
+			var/datum/mob_descriptor/descriptor = new desctype
+			descriptor.comparison_offset = descriptors[desctype]
+			descriptor_datums[descriptor.name] = descriptor
+		descriptors = descriptor_datums
 
 	//If the species has eyes, they are the default vision organ
 	if(!vision_organ && has_organ[O_EYES])
@@ -346,9 +370,16 @@
 				t_him = "him"
 			if(FEMALE)
 				t_him = "her"
-
-	H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
-					"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
+	if(H.zone_sel.selecting == "head") //VOREStation Edit - Headpats and Handshakes.
+		H.visible_message( \
+			"<span class='notice'>[H] pats [target] on the head.</span>", \
+			"<span class='notice'>You pat [target] on the head.</span>", )
+	else if(H.zone_sel.selecting == "r_hand" || H.zone_sel.selecting == "l_hand")
+		H.visible_message( \
+			"<span class='notice'>[H] shakes [target]'s hand.</span>", \
+			"<span class='notice'>You shake [target]'s hand.</span>", )
+	else H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
+					"<span class='notice'>You hug [target] to make [t_him] feel better!</span>") //End VOREStation Edit
 
 /datum/species/proc/remove_inherent_verbs(var/mob/living/carbon/human/H)
 	if(inherent_verbs)
@@ -368,7 +399,6 @@
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
-
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
@@ -410,6 +440,7 @@
 // Called in life() when the mob has no client.
 /datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
 	return
+
 
 // Called in life() when the mob has no client.
 /datum/species/proc/can_drive()

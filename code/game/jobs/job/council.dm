@@ -16,11 +16,13 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	req_admin_notify = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
-	minimal_player_age = 14
+	//minimal_player_age = 14
 	wage = 420
 
-	minimum_character_age = 30
+	minimum_character_age = 27
 	ideal_character_age = 50 // Old geezer captains ftw // Get your MILF/DILF fetish out of here //OwO What's this? // what the fuck - myo
+
+	hard_whitelisted = 1
 
 	outfit_type = /decl/hierarchy/outfit/job/heads/captain
 //	alt_titles = list("Site Manager", "Overseer")
@@ -48,7 +50,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	selection_color = "#1D1D4F"
 	idtype = /obj/item/weapon/card/id/silver/hop
 	req_admin_notify = 1
-	minimal_player_age = 10
+	//minimal_player_age = 10
 	wage = 300
 
 
@@ -87,7 +89,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	wage = 350
 	access = list(access_judge, access_warrant, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_judge, access_warrant, access_sec_doors, access_heads)
-	minimal_player_age = 14
+	//minimal_player_age = 14
 	minimum_character_age = 25
 	alt_titles = list("Magistrate")
 

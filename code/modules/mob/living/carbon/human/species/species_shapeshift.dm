@@ -130,7 +130,7 @@ var/list/wrapped_species_by_ref = list()
 	if(!new_gender)
 		return
 
-	var/new_gender_identity = input("Please select a gender Identity.", "Shapeshifter Gender Identity") as null|anything in list(FEMALE, MALE, NEUTER, PLURAL)
+	var/new_gender_identity = input("Please select a gender Identity.", "Shapeshifter Gender Identity") as null|anything in list(FEMALE, MALE, NEUTER, PLURAL, HERM) //VOREStation Edit
 	if(!new_gender_identity)
 		return
 
@@ -286,9 +286,10 @@ var/list/wrapped_species_by_ref = list()
 
 	spawn(0)
 		regenerate_icons()
-
+/* VOREStation Edit - Our own trait system, sorry.
 	if(species && mind)
 		apply_traits()
+*/
 	return
 
 /mob/living/carbon/human/proc/shapeshifter_select_eye_colour()

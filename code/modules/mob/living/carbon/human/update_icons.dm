@@ -77,23 +77,25 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 #define TAIL_LAYER				15		//Some species have tails to render
 #define GLASSES_LAYER			16		//Eye-slot item
 #define BELT_LAYER_ALT			17		//Belt-slot item (when set to be above suit via verb)
-#define SUIT_STORE_LAYER			18		//Suit storage-slot item
+#define SUIT_STORE_LAYER		18		//Suit storage-slot item
 #define BACK_LAYER				19		//Back-slot item
 #define HAIR_LAYER				20		//The human's hair
 #define EARS_LAYER				21		//Both ear-slot items (combined image)
 #define EYES_LAYER				22		//Mob's eyes (used for glowing eyes)
 #define FACEMASK_LAYER			23		//Mask-slot item
 #define HEAD_LAYER				24		//Head-slot item
-#define HANDCUFF_LAYER			25		//Handcuffs, if the human is handcuffed, in a secret inv slot
-#define LEGCUFF_LAYER			26		//Same as handcuffs, for legcuffs
-#define L_HAND_LAYER			27		//Left-hand item
-#define R_HAND_LAYER			28		//Right-hand item
-#define MODIFIER_EFFECTS_LAYER	29		//Effects drawn by modifiers
-#define FIRE_LAYER				30		//'Mob on fire' overlay layer
-#define WATER_LAYER				31		//'Mob submerged' overlay layer
-#define TARGETED_LAYER			32		//'Aimed at' overlay layer
-#define TOTAL_LAYERS			32//<---- KEEP THIS UPDATED, should always equal the highest number here, used to initialize a list.
-
+#define HEAD_LAYER				25		//Head-slot item
+#define HANDCUFF_LAYER			26		//Handcuffs, if the human is handcuffed, in a secret inv slot
+#define LEGCUFF_LAYER			27		//Same as handcuffs, for legcuffs
+#define L_HAND_LAYER			28		//Left-hand item
+#define R_HAND_LAYER			29		//Right-hand item
+#define WING_LAYER				30		//VOREStation edit. Simply move this up a number if things are added.
+#define TAIL_LAYER_ALT			31		//VOREStation edit. Simply move this up a number if things are added.
+#define MODIFIER_EFFECTS_LAYER	32		//Effects drawn by modifiers
+#define FIRE_LAYER				33		//'Mob on fire' overlay layer
+#define WATER_LAYER				34		//'Mob submerged' overlay layer
+#define TARGETED_LAYER			35		//'Aimed at' overlay layer
+#define TOTAL_LAYERS			35//<---- KEEP THIS UPDATED, should always equal the highest number here, used to initialize a list.
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -247,7 +249,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		g = "female"
 
 	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
-
+	if(lip_style)
+		icon_key += "[lip_style]"
+	else
+		icon_key += "nolips"
 	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[O_EYES]
 	if(eyes)
 		icon_key += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
@@ -267,7 +272,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 			if(part.body_hair && part.h_col && part.h_col.len >= 3)
 				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
-				icon_key += "[part.s_col_blend]"
+				if(species.color_mult)
+					icon_key += "[ICON_MULTIPLY]"
+				else
+					icon_key += "[ICON_ADD]"
 			else
 				icon_key += "#000000"
 			for(var/M in part.markings)
@@ -339,12 +347,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 	icon = stand_icon
 
+
+
 	//tail
 	update_tail_showing()
-
-	//face style
+	update_wing_showing()
 	update_face_style()
-
 
 /mob/living/carbon/human/proc/update_skin()
 	if(QDESTROYING(src))
@@ -441,6 +449,11 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				hair_s.Blend(hair_s_add, ICON_ADD)
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
+
+
+	var/icon/ears_s = get_ears_overlay()
+	if (ears_s)
+		face_standing.Blend(ears_s, ICON_OVERLAY)
 
 	if(head_organ.nonsolid)
 		face_standing += rgb(,,,120)
@@ -575,14 +588,8 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	var/obj/item/clothing/under/under = w_uniform
 
-	var/uniform_sprite
-
-	if(under.index)
-		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON]_[under.index].dmi"
-	else
-		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON].dmi"
-
 	//Build a uniform sprite
+	var/uniform_sprite = "[INV_W_UNIFORM_DEF_ICON][under.index].dmi"
 	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = uniform_sprite, default_layer = UNIFORM_LAYER)
 	apply_layer(UNIFORM_LAYER)
 
@@ -741,9 +748,11 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	update_inv_w_uniform()
 	update_inv_shoes()
 	update_tail_showing()
+	update_wing_showing()
 
 	if(!wear_suit)
 		return //No point, no suit.
+
 
 	var/obj/item/clothing/suit/suit = wear_suit
 	var/suit_sprite
@@ -863,14 +872,24 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		return
 
 	remove_layer(TAIL_LAYER)
+	remove_layer(TAIL_LAYER_ALT)
+
+	var/used_tail_layer = tail_alt ? TAIL_LAYER_ALT : TAIL_LAYER
+
+	var/image/vr_tail_image = get_tail_image()
+	if(vr_tail_image)
+		vr_tail_image.layer = BODY_LAYER+used_tail_layer
+		overlays_standing[used_tail_layer] = vr_tail_image
+		apply_layer(used_tail_layer)
+		return
+
 	var/species_tail = species.get_tail(src) // Species tail icon_state prefix.
 
 	//This one is actually not that bad I guess.
 	if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
 		var/icon/tail_s = get_tail_icon()
-		overlays_standing[TAIL_LAYER] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+TAIL_LAYER)
+			overlays_standing[used_tail_layer] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+used_tail_layer)
 		animate_tail_reset()
-
 //TODO: Is this the appropriate place for this, and not on species...?
 /mob/living/carbon/human/proc/get_tail_icon()
 	var/icon_key = "[species.get_race_key(src)][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
@@ -878,31 +897,34 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(!tail_icon)
 		//generate a new one
 		var/species_tail_anim = species.get_tail_animation(src)
+		if(!species_tail_anim && species.icobase_tail) species_tail_anim = species.icobase //VOREStation Code - Allow override of file for non-animated tails
 		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
 		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD) // VOREStation edit
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)
-			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
-			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
+			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]_s")	//VOREStation edit -- Suffix icon state string with '_s' to compensate for diff in .dmi b/w us & Polaris.
+			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), species.color_mult ? ICON_MULTIPLY : ICON_ADD)				//VOREStation edit -- Check for species color_mult
 			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
 
 	return tail_icon
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
-	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
+	var/used_tail_layer = tail_alt ? TAIL_LAYER_ALT : TAIL_LAYER // VOREStation Edit - START - Alt Tail Layer
+	var/image/tail_overlay = overlays_standing[used_tail_layer]
 
 	remove_layer(TAIL_LAYER)
+	remove_layer(TAIL_LAYER_ALT)
 
 	if(tail_overlay)
-		overlays_standing[TAIL_LAYER] = tail_overlay
+		overlays_standing[used_tail_layer] = tail_overlay
 		if(species.get_tail_animation(src))
 			tail_overlay.icon_state = t_state
 			. = tail_overlay
 
-	apply_layer(TAIL_LAYER)
+	apply_layer(used_tail_layer) // VOREStation Edit - END
 
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
@@ -913,7 +935,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	var/t_state = "[species.get_tail(src)]_once"
 
-	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
+	var/used_tail_layer = tail_alt ? TAIL_LAYER_ALT : TAIL_LAYER // VOREStation Edit - Alt Tail Layer
+
+	var/image/tail_overlay = overlays_standing[used_tail_layer] // VOREStation Edit - Alt Tail Layer
+
 	if(tail_overlay && tail_overlay.icon_state == t_state)
 		return //let the existing animation finish
 
@@ -921,7 +946,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(tail_overlay)
 		spawn(20)
 			//check that the animation hasn't changed in the meantime
-			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
+			if(overlays_standing[used_tail_layer] == tail_overlay && tail_overlay.icon_state == t_state) // VOREStation Edit - Alt Tail Layer
 				animate_tail_stop()
 
 /mob/living/carbon/human/proc/animate_tail_start()
@@ -1014,6 +1039,34 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		apply_layer(SURGERY_LAYER)
 
 
+/mob/living/carbon/human/proc/update_wing_showing()
+	if(QDESTROYING(src))
+		return
+
+	remove_layer(WING_LAYER)
+
+	var/image/vr_wing_image = get_wing_image()
+	if(vr_wing_image)
+		vr_wing_image.layer = BODY_LAYER+WING_LAYER
+		overlays_standing[WING_LAYER] = vr_wing_image
+
+	apply_layer(WING_LAYER)
+
+/obj/item/organ/external/proc/bandage_level()
+	if(damage_state_text() == "00")
+		return 0
+	if(!is_bandaged())
+		return 0
+	if(burn_dam + brute_dam == 0)
+		. = 0
+	else if (burn_dam + brute_dam < (max_damage * 0.25 / 2))
+		. = 1
+	else if (burn_dam + brute_dam < (max_damage * 0.75 / 2))
+		. = 2
+	else
+		. = 3
+
+
 /mob/living/carbon/human/proc/update_face_style()
 	remove_layer(FACE_STYLE_LAYER)
 
@@ -1069,7 +1122,6 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 #undef BELT_LAYER_ALT
 #undef SUIT_STORE_LAYER
 #undef BACK_LAYER
-#undef FACE_STYLE_LAYER
 #undef HAIR_LAYER
 #undef EARS_LAYER
 #undef EYES_LAYER

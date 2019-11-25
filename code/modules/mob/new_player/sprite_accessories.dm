@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_CHILD,SPECIES_HUMAN_TEEN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN)
+	var/list/species_allowed = list("Human","Promethean","Vatborn")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -43,165 +43,166 @@
 ////////////////////////////
 */
 
-#define HAIR_BALD 0 //*rubs head*
-#define HAIR_SHORT 1
-#define HAIR_MEDIUM 2
-#define HAIR_LONG 3
-
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face_m.dmi'	  // default icon for all hairs
 	var/icon_add = 'icons/mob/human_face.dmi'
-	var/hair_type = HAIR_SHORT // Default is short
+	var/flags
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		hair_type = HAIR_BALD
-		species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_CHILD,SPECIES_HUMAN_TEEN,SPECIES_UNATHI,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_VOX)
+		flags = HAIR_VERY_SHORT
+		species_allowed = list("Human","Unathi","Promethean","Vatborn")
+		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_VOX)
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
-		hair_type = HAIR_SHORT
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
+		flags = HAIR_VERY_SHORT
 
 	short2
 		name = "Short Hair 2"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_shorthair3"
+		flags = HAIR_VERY_SHORT
 
 	short3
 		name = "Short Hair 3"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_shorthair4"
+		flags = HAIR_VERY_SHORT
 
 	twintail
 		name = "Twintail"
-		hair_type = HAIR_LONG
 		icon_state = "hair_twintail"
+		flags = HAIR_TIEABLE
 
 	cut
 		name = "Cut Hair"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_c"
+		flags = HAIR_VERY_SHORT
 
 	flair
 		name = "Flaired Hair"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_flair"
+		flags = HAIR_TIEABLE
 
 	long
 		name = "Shoulder-length Hair"
-		hair_type = HAIR_LONG
 		icon_state = "hair_b"
+		flags = HAIR_TIEABLE
 
-	/*longish
+/*
+	longish
 		name = "Longer Hair"
-		icon_state = "hair_b2"*/
-
+		icon_state = "hair_b2"
+		flags = HAIR_TIEABLE
+*/
 	longer
 		name = "Long Hair"
-		hair_type = HAIR_LONG
 		icon_state = "hair_vlong"
+		flags = HAIR_TIEABLE
+
+	longeralt2
+		name = "Long Hair Alt 2"
+		icon_state = "hair_longeralt2"
+		flags = HAIR_TIEABLE
 
 	longest
 		name = "Very Long Hair"
-		hair_type = HAIR_LONG
 		icon_state = "hair_longest"
+		flags = HAIR_TIEABLE
 
 	longfringe
 		name = "Long Fringe"
-		hair_type = HAIR_LONG
 		icon_state = "hair_longfringe"
+		flags = HAIR_TIEABLE
 
 	longestalt
 		name = "Longer Fringe"
-		hair_type = HAIR_LONG
 		icon_state = "hair_vlongfringe"
+		flags = HAIR_TIEABLE
 
 	halfbang
 		name = "Half-banged Hair"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_halfbang"
 
 	halfbangalt
 		name = "Half-banged Hair Alt"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_halfbang_alt"
 
 	ponytail1
 		name = "Ponytail 1"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail"
+		flags = HAIR_TIEABLE|HAIR_VERY_SHORT
 
 	ponytail2
 		name = "Ponytail 2"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_pa"
+		flags = HAIR_TIEABLE
 
 	ponytail3
 		name = "Ponytail 3"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail3"
+		flags = HAIR_TIEABLE
 
 	ponytail4
 		name = "Ponytail 4"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail4"
+		flags = HAIR_TIEABLE
 
 	ponytail5
 		name = "Ponytail 5"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail5"
+		flags = HAIR_TIEABLE
 
 	ponytail6
 		name = "Ponytail 6"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail6"
+		flags = HAIR_TIEABLE|HAIR_VERY_SHORT
 
 	fringetail
 		name = "Fringetail"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_fringetail"
+		flags = HAIR_TIEABLE|HAIR_VERY_SHORT
 
 	sideponytail
 		name = "Side Ponytail"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_stail"
+		flags = HAIR_TIEABLE
 
 	sideponytail4 //Not happy about this... but it's for the save files.
 		name = "Side Ponytail 2"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytailf"
+		flags = HAIR_TIEABLE
 
 	sideponytail2
 		name = "One Shoulder"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_oneshoulder"
+		flags = HAIR_TIEABLE
 
 	sideponytail3
 		name = "Tress Shoulder"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_tressshoulder"
+		flags = HAIR_TIEABLE
 
 	spikyponytail
 		name = "Spiky Ponytail"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_spikyponytail"
+		flags = HAIR_TIEABLE
 
 	zieglertail
 		name = "Zieglertail"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ziegler"
+		flags = HAIR_TIEABLE
+
 	wisp
 		name = "Wisp"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_wisp"
+		flags = HAIR_TIEABLE
 
 	parted
 		name = "Parted"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_parted"
 
 	partedalt
@@ -210,211 +211,190 @@
 
 	pompadour
 		name = "Pompadour"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_pompadour"
 
 	sleeze
 		name = "Sleeze"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_sleeze"
+		flags = HAIR_VERY_SHORT
 
 	quiff
 		name = "Quiff"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_quiff"
 
 	bedhead
 		name = "Bedhead"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_bedhead"
 
 	bedhead2
 		name = "Bedhead 2"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_bedheadv2"
 
 	bedhead3
 		name = "Bedhead 3"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_bedheadv3"
+		flags = HAIR_TIEABLE
 
 	bedheadlong
 		name = "Bedhead Long"
-		hair_type = HAIR_LONG
 		icon_state = "hair_long_bedhead"
+		flags = HAIR_TIEABLE
 
 	beehive
 		name = "Beehive"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_beehive"
+		flags = HAIR_TIEABLE
 
 	beehive2
 		name = "Beehive 2"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_beehive2"
+		flags = HAIR_TIEABLE
 
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
-		hair_type = HAIR_SHORT
-		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+		species_allowed = list("Human","Promethean","Vatborn","Unathi")
+		flags = HAIR_TIEABLE
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
-		hair_type = HAIR_SHORT
-		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+		species_allowed = list("Human","Promethean","Vatborn","Unathi")
+		flags = HAIR_TIEABLE
 
 	bobcutalt
 		name = "Chin Length Bob"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_bobcutalt"
+		flags = HAIR_TIEABLE
 
 	bun
 		name = "Bun"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_bun"
 
 	bun2
 		name = "Bun 2"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_bun2"
 
 	bun3
 		name = "Bun 3"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_bun3"
 
 	bowl
 		name = "Bowl"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_bowlcut"
 
 	buzz
 		name = "Buzzcut"
-		hair_type = HAIR_BALD
 		icon_state = "hair_buzzcut"
+		flags = HAIR_VERY_SHORT
 		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+		species_allowed = list("Human","Promethean","Vatborn","Unathi")
 
 	shavehair
 		name = "Shaved Hair"
-		hair_type = HAIR_BALD
 		icon_state = "hair_shaved"
+		flags = HAIR_VERY_SHORT
 
 	crew
 		name = "Crewcut"
-		hair_type = HAIR_BALD
 		icon_state = "hair_crewcut"
+		flags = HAIR_VERY_SHORT
 
 	combover
 		name = "Combover"
-		hair_type = HAIR_BALD
 		icon_state = "hair_combover"
 
 	father
 		name = "Father"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_father"
 
 	reversemohawk
 		name = "Reverse Mohawk"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_reversemohawk"
 
 	devillock
 		name = "Devil Lock"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_devilock"
 
 	dreadlocks
 		name = "Dreadlocks"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_dreads"
 
 	curls
 		name = "Curls"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_curls"
+		flags = HAIR_TIEABLE
 
 	afro
 		name = "Afro"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_afro"
 
 	afro2
 		name = "Afro 2"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_afro2"
 
 	afro_large
 		name = "Big Afro"
-		hair_type = HAIR_LONG
 		icon_state = "hair_bigafro"
 
 	rows
 		name = "Rows"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_rows1"
+		flags = HAIR_VERY_SHORT
 
 	rows2
 		name = "Rows 2"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_rows2"
+		flags = HAIR_TIEABLE
 
 	sargeant
 		name = "Flat Top"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_sargeant"
+		flags = HAIR_VERY_SHORT
 
 	emo
 		name = "Emo"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_emo"
 
 	emo2
 		name = "Emo Alt"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_emo2"
 
 	longemo
 		name = "Long Emo"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_emolong"
+		flags = HAIR_TIEABLE
 
 	fringeemo
 		name = "Emo Fringe"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_emofringe"
+		flags = HAIR_TIEABLE
 
 	veryshortovereyealternate
 		name = "Overeye Very Short, Alternate"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_veryshortovereyealternate"
 
 	veryshortovereye
 		name = "Overeye Very Short"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_veryshortovereye"
 
 	shortovereye
 		name = "Overeye Short"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_shortovereye"
 
 	longovereye
 		name = "Overeye Long"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_longovereye"
+		flags = HAIR_TIEABLE
 
 	flowhair
 		name = "Flow Hair"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_f"
 
 	feather
 		name = "Feather"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_feather"
+		flags = HAIR_TIEABLE
 
 	glossy
 		name = "Glossy"
@@ -422,114 +402,102 @@
 
 	hitop
 		name = "Hitop"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_hitop"
 
 	mohawk
 		name = "Mohawk"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_d"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+		species_allowed = list("Human","Promethean","Vatborn","Unathi")
 
 	jensen
 		name = "Adam Jensen Hair"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_jensen"
 
 	gelled
 		name = "Gelled Back"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_gelled"
 
 	gentle
 		name = "Gentle"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_gentle"
-
-	gentlelong
-		name = "Gentle Long"
-		icon_state = "hair_gentle2long"
+		flags = HAIR_TIEABLE
 
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		hair_type = HAIR_SHORT
-		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+		species_allowed = list("Human","Promethean","Vatborn","Unathi")
 
 	kusangi
 		name = "Kusanagi Hair"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_kusanagi"
 
 	kagami
 		name = "Pigtails"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_kagami"
+		flags = HAIR_TIEABLE
 
 	himecut
 		name = "Hime Cut"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_himecut"
+		flags = HAIR_TIEABLE
 
 	shorthime
 		name = "Short Hime Cut"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_shorthime"
+		flags = HAIR_TIEABLE
 
 	grandebraid
 		name = "Grande Braid"
-		hair_type = HAIR_LONG
 		icon_state = "hair_grande"
+		flags = HAIR_TIEABLE
 
 	mbraid
 		name = "Medium Braid"
 		icon_state = "hair_shortbraid"
-		hair_type = HAIR_MEDIUM
+		flags = HAIR_TIEABLE
 
 	braid2
 		name = "Long Braid"
 		icon_state = "hair_hbraid"
-		hair_type = HAIR_LONG
+		flags = HAIR_TIEABLE
 
-	/*braid
+	braid
 		name = "Floorlength Braid"
 		icon_state = "hair_braid"
-		hair_type = HAIR_LONG*/
+		flags = HAIR_TIEABLE
 
 	odango
 		name = "Odango"
-		hair_type = HAIR_LONG
 		icon_state = "hair_odango"
+		flags = HAIR_TIEABLE
 
 	ombre
 		name = "Ombre"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ombre"
+		flags = HAIR_TIEABLE
 
 	updo
 		name = "Updo"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_updo"
+		flags = HAIR_TIEABLE
 
 	skinhead
 		name = "Skinhead"
-		hair_type = HAIR_BALD
 		icon_state = "hair_skinhead"
+		flags = HAIR_VERY_SHORT
 
 	balding
 		name = "Balding Hair"
 		icon_state = "hair_e"
-		hair_type = HAIR_BALD
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	familyman
 		name = "The Family Man"
-		hair_type = HAIR_MEDIUM
 		icon_state = "hair_thefamilyman"
 
 	mahdrills
 		name = "Drillruru"
-		hair_type = HAIR_SHORT
 		icon_state = "hair_drillruru"
 
 	fringetail
@@ -543,10 +511,13 @@
 	poofy
 		name = "Poofy"
 		icon_state = "hair_poofy"
+		flags = HAIR_TIEABLE
 
 	poofy2
 		name = "Poofy2"
 		icon_state = "hair_poofy2"
+		flags = HAIR_TIEABLE
+
 	crono
 		name = "Chrono"
 		icon_state = "hair_toriyama"
@@ -570,6 +541,7 @@
 	nitori
 		name = "Nitori"
 		icon_state = "hair_nitori"
+		flags = HAIR_TIEABLE
 
 	joestar
 		name = "Joestar"
@@ -578,6 +550,7 @@
 	volaju
 		name = "Volaju"
 		icon_state = "hair_volaju"
+		flags = HAIR_TIEABLE
 
 	eighties
 		name = "80's"
@@ -586,6 +559,7 @@
 	nia
 		name = "Nia"
 		icon_state = "hair_nia"
+		flags = HAIR_TIEABLE
 
 	unkept
 		name = "Unkept"
@@ -593,17 +567,7 @@
 
 	modern
 		name = "Modern"
-		hair_type = HAIR_LONG
 		icon_state = "hair_modern"
-
-	bald
-		name = "Bald"
-		hair_type = HAIR_BALD
-		icon_state = "bald"
-
-	longeralt2
-		name = "Long Hair Alt 2"
-		icon_state = "hair_longeralt2"
 
 	shortbangs
 		name = "Short Bangs"
@@ -616,10 +580,12 @@
 	bun
 		name = "Casual Bun"
 		icon_state = "hair_bun"
+		flags = HAIR_TIEABLE
 
 	doublebun
 		name = "Double-Bun"
 		icon_state = "hair_doublebun"
+		flags = HAIR_TIEABLE
 
 	oxton
 		name = "Oxton"
@@ -629,93 +595,113 @@
 		name = "Low Fade"
 		icon_state = "hair_lowfade"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	medfade
 		name = "Medium Fade"
 		icon_state = "hair_medfade"
+		flags = HAIR_VERY_SHORT
 
 	highfade
 		name = "High Fade"
 		icon_state = "hair_highfade"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	baldfade
 		name = "Balding Fade"
 		icon_state = "hair_baldfade"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	nofade
 		name = "Regulation Cut"
 		icon_state = "hair_nofade"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	trimflat
 		name = "Trimmed Flat Top"
 		icon_state = "hair_trimflat"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	trimmed
 		name = "Trimmed"
 		icon_state = "hair_trimmed"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	tightbun
 		name = "Tight Bun"
 		icon_state = "hair_tightbun"
 		gender = FEMALE
+		flags = HAIR_VERY_SHORT | HAIR_TIEABLE
 
 	coffeehouse
 		name = "Coffee House Cut"
 		icon_state = "hair_coffeehouse"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	undercut1
 		name = "Undercut"
 		icon_state = "hair_undercut1"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	undercut2
 		name = "Undercut Swept Right"
 		icon_state = "hair_undercut2"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	undercut3
 		name = "Undercut Swept Left"
 		icon_state = "hair_undercut3"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	partfade
 		name = "Parted Fade"
 		icon_state = "hair_shavedpart"
 		gender = MALE
+		flags = HAIR_VERY_SHORT
 
 	hightight
 		name = "High and Tight"
 		icon_state = "hair_hightight"
+		flags = HAIR_VERY_SHORT
 
 	rowbun
 		name = "Row Bun"
 		icon_state = "hair_rowbun"
+		flags = HAIR_TIEABLE
 
 	rowdualbraid
 		name = "Row Dual Braid"
 		icon_state = "hair_rowdualtail"
+		flags = HAIR_TIEABLE
 
 	rowbraid
 		name = "Row Braid"
 		icon_state = "hair_rowbraid"
+		flags = HAIR_TIEABLE
 
 	regulationmohawk
 		name = "Regulation Mohawk"
 		icon_state = "hair_shavedmohawk"
+		flags = HAIR_VERY_SHORT
 
 	topknot
 		name = "Topknot"
 		icon_state = "hair_topknot"
+		flags = HAIR_TIEABLE
 
 	ronin
 		name = "Ronin"
 		icon_state = "hair_ronin"
+		flags = HAIR_TIEABLE
 
 	bowlcut2
 		name = "Bowl2"
@@ -724,37 +710,37 @@
 	thinning
 		name = "Thinning"
 		icon_state = "hair_thinning"
+		flags = HAIR_VERY_SHORT
 
 	thinningfront
 		name = "Thinning Front"
 		icon_state = "hair_thinningfront"
+		flags = HAIR_VERY_SHORT
 
 	thinningback
 		name = "Thinning Back"
 		icon_state = "hair_thinningrear"
+		flags = HAIR_VERY_SHORT
 
 	manbun
 		name = "Manbun"
 		icon_state = "hair_manbun"
+		flags = HAIR_TIEABLE
 
-	/*shy
+	shy
 		name = "Shy"
-		hair_type = HAIR_LONG
-		icon_state = "hair_shy"*/
+		icon_state = "hair_shy"
 
 	jade
 		name = "Jade"
-		hair_type = HAIR_LONG
 		icon_state = "hair_jade"
 
 	country
 		name = "Country"
-		hair_type = HAIR_LONG
 		icon_state = "hair_country"
 
 	rosa
 		name = "Rosa"
-		hair_type = HAIR_LONG
 		icon_state = "hair_rosa"
 
 	dave
@@ -765,62 +751,45 @@
 		name = "Unshaven Mohawk"
 		icon_state = "hair_unshaven_mohawk"
 /*
-	undercut4
-		name = "Regulation Undercut"
-		icon_state = "hair_undercut4"
+	belenko
+		name = "Belenko"
+		icon_state = "hair_belenko"
+		flags = HAIR_TIEABLE
 */
 /*
-	slick
-		name = "Slick"
-		icon_state = "hair_slick"
+	belenkotied
+		name = "Belenko Tied"
+		icon_state = "hair_belenkotied"
+		flags = HAIR_TIEABLE
 */
-	messyhair
-		name = "All Up"
-		icon_state = "hair_messyhair"
+	belenkotied
+		name = "Supernova"
+		icon_state = "hair_supernova"
+		flags = HAIR_TIEABLE
 
-	averagejoe
-		name = "Average Joe"
-		icon_state = "hair_averagejoe"
+	keanu
+		name = "Keanu"
+		icon_state = "hair_keanu"
+		flags = HAIR_TIEABLE			//or any other flags you want, this isn't required.
 
-	amazon
-		name = "Amazon"
-		icon_state = "hair_amazon"
+	hedgehog
+		name = "Hedgehog Hair"
+		icon_state = "hair_hedgehog"
 
-	straightlong
-		name = "Straight Long"
-		icon_state = "hair_straightlong"
+	pixie_cut
+		name = "Pixie Cut"
+		icon_state = "hair_pixie"
 
-	marysue
-		name = "Mary Sue"
-		icon_state = "hair_marysue"
+	business_2
+		name = "Business Hair 2"
+		icon_state = "hair_business2"
+		flags = HAIR_TIEABLE
 
-	sideundercut
-		name = "Side Undercut"
-		icon_state = "hair_sideundercut"
+	long_hair_3
+		name = "Long Hair 3"
+		icon_state = "hair_long3"
+		flags = HAIR_TIEABLE
 
-	donutbun
-		name = "Donut Bun"
-		icon_state = "hair_donutbun"
-
-	sweepshave
-		name = "Sweep Shave"
-		icon_state = "hair_sweepshave"
-
-	beachwave
-		name = "Beach Waves"
-		icon_state = "hair_beachwave"
-
-	celebcurls
-		name = "Celeb Curls"
-		icon_state = "hair_celebcurls"
-
-	jessica
-		name = "Jessica"
-		icon_state = "hair_jessica"
-
-	proper
-		name = "Proper"
-		icon_state = "hair_proper"
 
 	newyou
 		name = "New You"
@@ -908,8 +877,6 @@
 */
 
 /datum/sprite_accessory/facial_hair
-	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN)
-
 
 	icon = 'icons/mob/Human_face.dmi'
 
@@ -917,7 +884,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_CHILD,SPECIES_HUMAN_TEEN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI,SPECIES_TAJ,SPECIES_SKRELL, "Machine", SPECIES_TESHARI, SPECIES_TESHARI,SPECIES_PROMETHEAN)
+		species_allowed = list("Human","Vatborn","Unathi","Tajara","Skrell", "Machine","Teshari", "Vox","Promethean")
 
 	watson
 		name = "Watson Mustache"
@@ -958,7 +925,7 @@
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+		species_allowed = list("Human","Promethean","Vatborn","Unathi")
 
 	abe
 		name = "Abraham Lincoln Beard"
@@ -1055,326 +1022,331 @@
 	una_spines_long
 		name = "Long Unathi Spines"
 		icon_state = "soghun_longspines"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_spines_short
 		name = "Short Unathi Spines"
 		icon_state = "soghun_shortspines"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_frills_long
 		name = "Long Unathi Frills"
 		icon_state = "soghun_longfrills"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_frills_short
 		name = "Short Unathi Frills"
 		icon_state = "soghun_shortfrills"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_horns
 		name = "Unathi Horns"
 		icon_state = "soghun_horns"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_bighorns
 		name = "Unathi Big Horns"
 		icon_state = "unathi_bighorn"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_smallhorns
 		name = "Unathi Small Horns"
 		icon_state = "unathi_smallhorn"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_ramhorns
 		name = "Unathi Ram Horns"
 		icon_state = "unathi_ramhorn"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_sidefrills
 		name = "Unathi Side Frills"
 		icon_state = "unathi_sidefrills"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 //Skrell 'hairstyles'
 	skr_tentacle_veryshort
 		name = "Skrell Very Short Tentacles"
 		icon_state = "skrell_hair_veryshort"
-		species_allowed = list(SPECIES_SKRELL)
+		species_allowed = list("Skrell")
 		gender = MALE
 
 	skr_tentacle_short
 		name = "Skrell Short Tentacles"
 		icon_state = "skrell_hair_short"
-		species_allowed = list(SPECIES_SKRELL)
+		species_allowed = list("Skrell")
 
 	skr_tentacle_average
 		name = "Skrell Average Tentacles"
 		icon_state = "skrell_hair_average"
-		species_allowed = list(SPECIES_SKRELL)
+		species_allowed = list("Skrell")
 
 	skr_tentacle_verylong
 		name = "Skrell Long Tentacles"
 		icon_state = "skrell_hair_verylong"
-		species_allowed = list(SPECIES_SKRELL)
+		species_allowed = list("Skrell")
 		gender = FEMALE
 
 //Tajaran hairstyles
 	taj_ears
 		name = "Tajaran Ears"
 		icon_state = "ears_plain"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_clean
-		name = "Tajaran Clean"
+		name = "Tajara Clean"
 		icon_state = "hair_clean"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_bangs
-		name = "Tajaran Bangs"
+		name = "Tajara Bangs"
 		icon_state = "hair_bangs"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_braid
-		name = "Tajaran Braid"
+		name = "Tajara Braid"
 		icon_state = "hair_tbraid"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_shaggy
-		name = "Tajaran Shaggy"
+		name = "Tajara Shaggy"
 		icon_state = "hair_shaggy"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_mohawk
 		name = "Tajaran Mohawk"
 		icon_state = "hair_mohawk"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_plait
-		name = "Tajaran Plait"
+		name = "Tajara Plait"
 		icon_state = "hair_plait"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_straight
-		name = "Tajaran Straight"
+		name = "Tajara Straight"
 		icon_state = "hair_straight"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_long
-		name = "Tajaran Long"
+		name = "Tajara Long"
 		icon_state = "hair_long"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_rattail
-		name = "Tajaran Rat Tail"
+		name = "Tajara Rat Tail"
 		icon_state = "hair_rattail"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_spiky
-		name = "Tajaran Spiky"
+		name = "Tajara Spiky"
 		icon_state = "hair_tajspiky"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_messy
-		name = "Tajaran Messy"
+		name = "Tajara Messy"
 		icon_state = "hair_messy"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_curls
-		name = "Tajaran Curly"
+		name = "Tajara Curly"
 		icon_state = "hair_curly"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_wife
-		name = "Tajaran Housewife"
+		name = "Tajara Housewife"
 		icon_state = "hair_wife"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_victory
-		name = "Tajaran Victory Curls"
+		name = "Tajara Victory Curls"
 		icon_state = "hair_victory"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_bob
-		name = "Tajaran Bob"
+		name = "Tajara Bob"
 		icon_state = "hair_tbob"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_ears_fingercurl
-		name = "Tajaran Finger Curls"
+		name = "Tajara Finger Curls"
 		icon_state = "hair_fingerwave"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 //Teshari things
 	teshari
 		name = "Teshari Default"
 		icon_state = "teshari_default"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_altdefault
 		name = "Teshari Alt. Default"
 		icon_state = "teshari_ears"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_tight
 		name = "Teshari Tight"
 		icon_state = "teshari_tight"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_excited
 		name = "Teshari Spiky"
 		icon_state = "teshari_spiky"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_spike
 		name = "Teshari Spike"
 		icon_state = "teshari_spike"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_long
 		name = "Teshari Overgrown"
 		icon_state = "teshari_long"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_burst
 		name = "Teshari Starburst"
 		icon_state = "teshari_burst"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_shortburst
 		name = "Teshari Short Starburst"
 		icon_state = "teshari_burst_short"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_mohawk
 		name = "Teshari Mohawk"
 		icon_state = "teshari_mohawk"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_pointy
 		name = "Teshari Pointy"
 		icon_state = "teshari_pointy"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_upright
 		name = "Teshari Upright"
 		icon_state = "teshari_upright"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_mane
 		name = "Teshari Mane"
 		icon_state = "teshari_mane"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_droopy
 		name = "Teshari Droopy"
 		icon_state = "teshari_droopy"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 	teshari_mushroom
 		name = "Teshari Mushroom"
 		icon_state = "teshari_mushroom"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 
 // Vox things
 	vox_braid_long
 		name = "Long Vox braid"
 		icon_state = "vox_longbraid"
-		species_allowed = list(SPECIES_VOX)
+		species_allowed = list("Vox")
 
 	vox_braid_short
 		name = "Short Vox Braid"
 		icon_state = "vox_shortbraid"
-		species_allowed = list(SPECIES_VOX)
+		species_allowed = list("Vox")
 
 	vox_quills_short
 		name = "Short Vox Quills"
 		icon_state = "vox_shortquills"
-		species_allowed = list(SPECIES_VOX)
+		species_allowed = list("Vox")
 
 	vox_quills_kingly
 		name = "Kingly Vox Quills"
 		icon_state = "vox_kingly"
-		species_allowed = list(SPECIES_VOX)
+		species_allowed = list("Vox")
 
 	vox_quills_mohawk
 		name = "Quill Mohawk"
 		icon_state = "vox_mohawk"
-		species_allowed = list(SPECIES_VOX)
+		species_allowed = list("Vox")
 
 /datum/sprite_accessory/facial_hair
 
 	taj_sideburns
-		name = "Tajaran Sideburns"
+		name = "Tajara Sideburns"
 		icon_state = "facial_sideburns"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_mutton
-		name = "Tajaran Mutton"
+		name = "Tajara Mutton"
 		icon_state = "facial_mutton"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_pencilstache
-		name = "Tajaran Pencilstache"
+		name = "Tajara Pencilstache"
 		icon_state = "facial_pencilstache"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_moustache
-		name = "Tajaran Moustache"
+		name = "Tajara Moustache"
 		icon_state = "facial_moustache"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_goatee
-		name = "Tajaran Goatee"
+		name = "Tajara Goatee"
 		icon_state = "facial_goatee"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 	taj_smallstache
-		name = "Tajaran Smallsatche"
+		name = "Tajara Smallsatche"
 		icon_state = "facial_smallstache"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara", "Pastrian")
 
 //unathi horn beards and the like
 
 	una_chinhorn
 		name = "Unathi Chin Horn"
 		icon_state = "facial_chinhorns"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi", "Pastrian")
 
 	una_hornadorns
 		name = "Unathi Horn Adorns"
 		icon_state = "facial_hornadorns"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi", "Pastrian")
 
 	una_spinespikes
 		name = "Unathi Spine Spikes"
 		icon_state = "facial_spikes"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi", "Pastrian")
 
 	una_dorsalfrill
 		name = "Unathi Dorsal Frill"
 		icon_state = "facial_dorsalfrill"
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi", "Pastrian")
 
+	una_dorsalfinl//eclipse edit
+		name = "Unathi Dorsal Fin"
+		icon = 'modular_eclipse/icons/mob/human_face_eclipse.dmi'
+		icon_state = "facial_dorsalfin"
+		species_allowed = list("Unathi", "Pastrian")
 
 //Teshari things
 	teshari_beard
 		name = "Teshari Beard"
 		icon_state = "teshari_chin"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 		gender = NEUTER
 
 	teshari_scraggly
 		name = "Teshari Scraggly"
 		icon_state = "teshari_scraggly"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 		gender = NEUTER
 
 	teshari_chops
 		name = "Teshari Chops"
 		icon_state = "teshari_gap"
-		species_allowed = list(SPECIES_TESHARI)
+		species_allowed = list("Teshari")
 		gender = NEUTER
 
 /*
@@ -1389,7 +1361,7 @@
 	do_colouration = 1 //Almost all of them have it, COLOR_ADD
 
 	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
-	//like Tajaran inner-ear coloring overlay stuff.
+	//like Tajara inner-ear coloring overlay stuff.
 	species_allowed = list()
 
 	var/body_parts = list() //A list of bodyparts this covers, in organ_tag defines
@@ -1419,6 +1391,24 @@
 			name = "Tattoo (Campbell, L.Arm)"
 			body_parts = list(BP_L_ARM)
 
+		rightleg
+			name = "Tattoo (Campbell, R.Leg)"
+			body_parts = list(BP_R_LEG)
+
+		leftleg
+			name = "Tattoo (Campbell, L.Leg)"
+			body_parts = list (BP_L_LEG)
+
+	tat_silverburgh
+		name = "Tattoo (Silverburgh, R.Leg)"
+		icon_state = "tat_silverburgh"
+		body_parts = list (BP_R_LEG)
+
+		left
+			name = "Tattoo (Silverburgh, L.Leg)"
+			icon_state = "tat_silverburgh"
+			body_parts = list (BP_L_LEG)
+
 	tat_tiger
 		name = "Tattoo (Tiger Stripes, Body)"
 		icon_state = "tat_tiger"
@@ -1428,55 +1418,61 @@
 		name = "Socks Coloration (Taj)"
 		icon_state = "taj_pawsocks"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	una_paw_socks
 		name = "Socks Coloration (Una)"
 		icon_state = "una_pawsocks"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	paw_socks
 		name = "Socks Coloration (Generic)"
 		icon_state = "pawsocks"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
-		species_allowed = list(SPECIES_TAJ, SPECIES_UNATHI)
+		species_allowed = list("Tajara", "Unathi")
 
 	paw_socks_belly
 		name = "Socks,Belly Coloration (Generic)"
 		icon_state = "pawsocksbelly"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_TORSO)
-		species_allowed = list(SPECIES_TAJ, SPECIES_UNATHI)
+		species_allowed = list("Tajara", "Unathi")
 
 	belly_hands_feet
 		name = "Hands,Feet,Belly Color (Minor)"
 		icon_state = "bellyhandsfeetsmall"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_TORSO)
-		species_allowed = list(SPECIES_TAJ, SPECIES_UNATHI)
+		species_allowed = list("Tajara", "Unathi")
 
 	hands_feet_belly_full
 		name = "Hands,Feet,Belly Color (Major)"
 		icon_state = "bellyhandsfeet"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_TORSO)
-		species_allowed = list(SPECIES_TAJ, SPECIES_UNATHI)
+		species_allowed = list("Tajara", "Unathi")
 
 	hands_feet_belly_full_female
 		name = "Hands,Feet,Belly Color (Major, Female)"
 		icon_state = "bellyhandsfeet_female"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_GROIN,BP_TORSO)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
+
+	panda_eye_marks
+		name = "Panda Eye Markings"
+		icon_state = "eyes-panda"
+		body_parts = list(BP_HEAD)
+		species_allowed = list("Human")
 
 	patches
 		name = "Color Patches"
 		icon_state = "patches"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_TORSO,BP_GROIN)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	patchesface
 		name = "Color Patches (Face)"
 		icon_state = "patchesface"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	bands
 		name = "Color Bands"
@@ -1492,7 +1488,7 @@
 		name = "Tiger Stripes"
 		icon_state = "tiger"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_TORSO,BP_GROIN)
-		species_allowed = list(SPECIES_TAJ) //There's a tattoo for non-cats
+		species_allowed = list("Tajara") //There's a tattoo for non-cats
 
 	tigerhead
 		name = "Tiger Stripes (Head, Minor)"
@@ -1503,7 +1499,7 @@
 		name = "Tiger Stripes (Head, Major)"
 		icon_state = "tigerface"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_TAJ) //There's a tattoo for non-cats
+		species_allowed = list("Tajara") //There's a tattoo for non-cats
 
 	backstripe
 		name = "Back Stripe"
@@ -1515,74 +1511,74 @@
 		name = "Belly Fur (Taj)"
 		icon_state = "taj_belly"
 		body_parts = list(BP_TORSO)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	taj_bellyfull
 		name = "Belly Fur Wide (Taj)"
 		icon_state = "taj_bellyfull"
 		body_parts = list(BP_TORSO)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	taj_earsout
 		name = "Outer Ear (Taj)"
 		icon_state = "taj_earsout"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	taj_earsin
 		name = "Inner Ear (Taj)"
 		icon_state = "taj_earsin"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	taj_nose
 		name = "Nose Color (Taj)"
 		icon_state = "taj_nose"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	taj_crest
 		name = "Chest Fur Crest (Taj)"
 		icon_state = "taj_crest"
 		body_parts = list(BP_TORSO)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	taj_muzzle
 		name = "Muzzle Color (Taj)"
 		icon_state = "taj_muzzle"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	taj_face
 		name = "Cheeks Color (Taj)"
 		icon_state = "taj_face"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	taj_all
 		name = "All Taj Head (Taj)"
 		icon_state = "taj_all"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	//Una specific stuff
 	una_face
 		name = "Face Color (Una)"
 		icon_state = "una_face"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_facelow
 		name = "Face Color Low (Una)"
 		icon_state = "una_facelow"
 		body_parts = list(BP_HEAD)
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	una_scutes
 		name = "Scutes (Una)"
 		icon_state = "una_scutes"
 		body_parts = list(BP_TORSO)
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 //skin styles - WIP
 //going to have to re-integrate this with surgery
@@ -1593,27 +1589,27 @@
 	human
 		name = "Default human skin"
 		icon_state = "default"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN)
+		species_allowed = list("Human","Vatborn")
 
 	human_tatt01
 		name = "Tatt01 human skin"
 		icon_state = "tatt1"
-		species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN)
+		species_allowed = list("Human","Vatborn")
 
 	tajaran
 		name = "Default tajaran skin"
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_tajaran.dmi'
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list("Tajara")
 
 	unathi
 		name = "Default Unathi skin"
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_lizard.dmi'
-		species_allowed = list(SPECIES_UNATHI)
+		species_allowed = list("Unathi")
 
 	skrell
 		name = "Default skrell skin"
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_skrell.dmi'
-		species_allowed = list(SPECIES_SKRELL)
+		species_allowed = list("Skrell")

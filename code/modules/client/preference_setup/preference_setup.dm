@@ -32,21 +32,21 @@
 	name = "Matchmaking"
 	sort_order = 5
 	category_item_type = /datum/category_item/player_setup_item/relations
-
+/*
 /datum/category_group/player_setup_category/trait_preferences
 	name = "Traits"
 	sort_order = 6
 	category_item_type = /datum/category_item/player_setup_item/traits
-
+*/
 /datum/category_group/player_setup_category/loadout_preferences
 	name = "Loadout"
-	sort_order = 7
+	sort_order = 6
 	category_item_type = /datum/category_item/player_setup_item/loadout
 
 
 /datum/category_group/player_setup_category/global_preferences
 	name = "Global"
-	sort_order = 8
+	sort_order = 7
 	category_item_type = /datum/category_item/player_setup_item/player_global
 
 /****************************

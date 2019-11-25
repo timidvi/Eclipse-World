@@ -8,6 +8,7 @@
 	var/l_move_time = 1
 	var/m_flag = 1
 	var/throwing = 0
+	var/paused = 0
 	var/thrower
 	var/turf/throw_source = null
 	var/throw_speed = 2
@@ -16,8 +17,10 @@
 	var/mob/pulledby = null
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/icon_scale = 1 // Used to scale icons up or down in update_transform().
+	var/icon_rotation = 0 // Used to rotate icons in update_transform()
 	var/old_x = 0
 	var/old_y = 0
+	var/datum/riding/riding_datum //VOREStation Add - Moved from /obj/vehicle
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
 
 /atom/movable/Destroy()
@@ -38,6 +41,7 @@
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
+	QDEL_NULL(riding_datum) //VOREStation Add
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
@@ -107,6 +111,8 @@
 //decided whether a movable atom being thrown can pass through the turf it is in.
 /atom/movable/proc/hit_check(var/speed)
 	if(src.throwing)
+		while(paused)//timestop checks
+			sleep(1)
 		for(var/atom/A in get_turf(src))
 			if(A == src) continue
 			if(istype(A,/mob/living))
@@ -274,12 +280,19 @@
 		return null
 	return text2num(pickweight(candidates))
 
+
+
 /atom/movable/proc/update_transform()
 	var/matrix/M = matrix()
 	M.Scale(icon_scale)
+	M.Turn(icon_rotation)
 	src.transform = M
 
 // Use this to set the object's scale.
 /atom/movable/proc/adjust_scale(new_scale)
 	icon_scale = new_scale
+	update_transform()
+
+/atom/movable/proc/adjust_rotation(new_rotation)
+	icon_rotation = new_rotation
 	update_transform()
