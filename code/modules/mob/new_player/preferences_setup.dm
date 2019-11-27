@@ -204,13 +204,6 @@
 		mannequin.regenerate_icons()
 		mannequin.resize(size_multiplier, animate = FALSE)
 
-	mannequin.species.create_organs(mannequin)
-	var/obj/item/organ/internal/eyes/eyes = mannequin.internal_organs_by_name[O_EYES]
-	if(eyes)
-		eyes.update_colour()
-	mannequin.regenerate_icons()
-	mannequin.resize(size_multiplier, animate = FALSE)
-
 	if(!equip_preview_mob)
 		return
 

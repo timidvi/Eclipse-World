@@ -54,7 +54,7 @@
 		dna.ready_dna(src)
 		dna.real_name = real_name
 		sync_organ_dna()
-
+/*
 	spawn(1)//Hacky, but fixes a few appearance bugs
 		species.create_organs(src)
 		var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[O_EYES]
@@ -62,7 +62,7 @@
 			eyes.update_colour()
 		restore_all_organs()
 		regenerate_icons()
-		resize(size_multiplier, animate = FALSE)
+		resize(size_multiplier, animate = FALSE)*/
 
 /mob/living/carbon/human/Destroy()
 	human_mob_list -= src

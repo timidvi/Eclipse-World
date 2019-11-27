@@ -575,9 +575,17 @@
 	//new_character.dna.UpdateSE()
 
 	// Do the initial caching of the player's body icons.
-	new_character.force_update_limbs()
+	spawn(1)//Hacky, but fixes a few appearance bugs
+		new_character.species.create_organs(src)
+		var/obj/item/organ/internal/eyes/eyes = new_character.internal_organs_by_name[O_EYES]
+		if(eyes)
+			eyes.update_colour()
+		new_character.restore_all_organs()
+		new_character.regenerate_icons()
+		new_character.resize(new_character.size_multiplier, animate = FALSE)
+/*	new_character.force_update_limbs()
 	new_character.update_icons_body()
-	new_character.update_eyes()
+	new_character.update_eyes()*/
 
 	new_character.key = key		//Manually transfer the key to log them in
 
