@@ -60,6 +60,7 @@
 		var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[O_EYES]
 		if(eyes)
 			eyes.update_colour()
+		restore_all_organs()
 		regenerate_icons()
 		resize(size_multiplier, animate = FALSE)
 
