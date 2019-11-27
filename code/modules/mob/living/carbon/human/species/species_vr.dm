@@ -17,6 +17,7 @@
 	var/wing_animation
 	var/icobase_wing
 
+
 /datum/species/proc/update_attack_types()
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)

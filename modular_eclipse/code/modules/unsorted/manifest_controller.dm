@@ -8,8 +8,6 @@ var/datum/manifest_controller/mnfst = new/datum/manifest_controller
 /datum/manifest_controller/New()
 	spawn(3 MINUTE) //Lots of lag at the start of a shift.
 		process()
-	log_and_message_admins("Manifest Updater loaded.")
-
 
 /datum/manifest_controller/process()
 	update_manifest()

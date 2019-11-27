@@ -70,6 +70,8 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
+			if (istype(H) && attempt_to_scoop(H))
+				return 0
 			if(istype(H) && health < config.health_threshold_crit)
 				if(!H.check_has_mouth())
 					H << "<span class='danger'>You don't have a mouth, you cannot perform CPR!</span>"
@@ -235,7 +237,7 @@
 				H.visible_message("<span class='danger'>[attack_message]</span>")
 
 			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
-			
+
 			add_attack_logs(H,src,"Melee attacked with fists (miss/block)")
 
 			if(miss_type)

@@ -49,9 +49,9 @@ datum/preferences
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
 	var/s_tone = 0						//Skin tone
-	var/r_skin = 0						//Skin color
-	var/g_skin = 0						//Skin color
-	var/b_skin = 0						//Skin color
+	var/r_skin = 238					//Skin color // Vorestation edit, so color multi sprites can aren't BLACK AS THE VOID by default.
+	var/g_skin = 206					//Skin color // Vorestation edit, so color multi sprites can aren't BLACK AS THE VOID by default.
+	var/b_skin = 179					//Skin color // Vorestation edit, so color multi sprites can aren't BLACK AS THE VOID by default.
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
@@ -326,6 +326,8 @@ datum/preferences
 	// Special Case: This references variables owned by two different datums, so do it here.
 //	if(be_random_name)
 //		real_name = random_name(identifying_gender,species)
+
+	character.force_update_organs()
 
 
 	// Ask the preferences datums to apply their own settings to the new mob

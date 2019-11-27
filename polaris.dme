@@ -2613,6 +2613,7 @@
 #include "code\modules\virgostuff\appearance\update_icons_vr.dm"
 #include "code\modules\virgostuff\resizing\grav_pull_vr.dm"
 #include "code\modules\virgostuff\resizing\holder_micro_vr.dm"
+#include "code\modules\virgostuff\resizing\preferences_setup_vr.dm"
 #include "code\modules\virgostuff\resizing\resize_vr.dm"
 #include "code\modules\virgostuff\resizing\sizegun_vr.dm"
 #include "code\modules\virus2\admin.dm"

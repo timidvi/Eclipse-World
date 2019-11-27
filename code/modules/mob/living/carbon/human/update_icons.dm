@@ -125,19 +125,16 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	crash_with("CANARY: Old human update_icons_huds was called.")
 
 /mob/living/carbon/human/update_transform()
+	/* VOREStation Edit START - TODO - Consider switching to icon_scale
 	// First, get the correct size.
 	var/desired_scale = icon_scale
-	var/desired_width = icon_scale
-
 	desired_scale *= species.icon_scale
-	desired_width *= species.icon_width
-
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.icon_scale_percent))
 			desired_scale *= M.icon_scale_percent
-
-		if(!isnull(M.icon_width_percent))
-			desired_width *= M.icon_width_percent
+	*/
+	var/desired_scale = size_multiplier
+	//VOREStation Edit End
 
 	// Regular stuff again.
 	var/matrix/M = matrix()
@@ -149,17 +146,16 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 		M.Turn(90)
-		M.Translate(desired_width, 16*(desired_scale-1))
-		M.Scale(desired_width, desired_scale)
+		M.Scale(desired_scale)
+		M.Translate(1,-6)
 		layer = MOB_LAYER -0.01 // Fix for a byond bug where turf entry order no longer matters
 	else
-		M.Translate(desired_width, 16*(desired_scale-1))
-		M.Scale(desired_width, desired_scale)
+		M.Scale(desired_scale)
+		M.Translate(0, 16*(desired_scale-1))
 		layer = MOB_LAYER // Fix for a byond bug where turf entry order no longer matters
 
 	animate(src, transform = M, time = anim_time)
 	update_icon_special() //May contain transform-altering things
-
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists

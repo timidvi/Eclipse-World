@@ -55,6 +55,14 @@
 		dna.real_name = real_name
 		sync_organ_dna()
 
+	spawn(1)//Hacky, but fixes a few appearance bugs
+		species.create_organs(src)
+		var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[O_EYES]
+		if(eyes)
+			eyes.update_colour()
+		regenerate_icons()
+		resize(size_multiplier, animate = FALSE)
+
 /mob/living/carbon/human/Destroy()
 	human_mob_list -= src
 	for(var/organ in organs)
@@ -1179,14 +1187,13 @@
 	//A slew of bits that may be affected by our species change
 	regenerate_icons()
 
-/*
 	if(species)
-		if(mind)
-			apply_traits()
+		//if(mind) //VOREStation Removal
+			//apply_traits() //VOREStation Removal
 		return 1
 	else
 		return 0
-*/
+
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
 	set name = "Write in blood"

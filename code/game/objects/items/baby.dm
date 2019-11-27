@@ -1,7 +1,7 @@
 
 /obj/item/weapon/baby
 	name = "baby"
-	desc = "A very, very young child. How cute."
+	desc = "A plastic replica of a very young human child, used for parenting training. How cute."
 	icon = 'icons/obj/baby.dmi'
 	icon_state = "baby-blackeyed"
 

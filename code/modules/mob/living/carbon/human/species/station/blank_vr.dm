@@ -1,4 +1,3 @@
-
 /datum/species
 	//var/vore_numbing = 0
 	var/gets_food_nutrition = TRUE // If this is set to 0, the person can't get nutrition from food.
@@ -48,6 +47,12 @@
 
 /datum/species/custom/get_bodytype()
 	return base_species
+
+
+/datum/species/custom/create_organs(var/mob/living/carbon/human/H)
+	..()
+	H.regenerate_icons()
+
 
 /datum/species/custom/get_race_key()
 	var/datum/species/real = all_species[base_species]
