@@ -391,7 +391,7 @@ var/global/list/cont_flavors_musky = list("drenched",
 		wing_styles_list[path] = instance
 
 	// Custom species traits
-	paths = typesof(/datum/trait) - /datum/trait
+/*	paths = typesof(/datum/trait) - /datum/trait
 	for(var/path in paths)
 		var/datum/trait/instance = new path()
 		if(!instance.name)
@@ -405,7 +405,7 @@ var/global/list/cont_flavors_musky = list("drenched",
 			if(0)
 				neutral_traits[path] = instance
 			if(0.1 to INFINITY)
-				positive_traits[path] = instance
+				positive_traits[path] = instance*/
 
 	// Custom species icon bases
 	var/list/blacklisted_icons = list(SPECIES_CUSTOM,SPECIES_PROMETHEAN) //Just ones that won't work well.

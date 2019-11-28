@@ -54,8 +54,8 @@
 		dna.ready_dna(src)
 		dna.real_name = real_name
 		sync_organ_dna()
-/*
-	spawn(1)//Hacky, but fixes a few appearance bugs
+
+/*	spawn(10)//Hacky, but fixes a few appearance bugs
 		species.create_organs(src)
 		var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[O_EYES]
 		if(eyes)

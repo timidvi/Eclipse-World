@@ -103,7 +103,7 @@
 		. += "<b>Icon Base: </b> "
 		. += "<a href='?src=\ref[src];custom_base=1'>[pref.custom_base ? pref.custom_base : "Human"]</a><br>"
 
-	if(pref.species == SPECIES_CUSTOM)
+/*	if(pref.species == SPECIES_CUSTOM)
 		var/points_left = pref.starting_trait_points
 		var/traits_left = pref.max_traits
 		for(var/T in pref.pos_traits + pref.neg_traits)
@@ -134,7 +134,7 @@
 		for(var/T in pref.neg_traits)
 			var/datum/trait/trait = negative_traits[T]
 			. += "<li>- <a href='?src=\ref[src];clicked_neg_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
-		. += "</ul>"
+		. += "</ul>"*/
 	. += "<b>Blood Color: </b>" //People that want to use a certain species to have that species traits (xenochimera/promethean/spider) should be able to set their own blood color.
 	. += "<a href='?src=\ref[src];blood_color=1'>Set Color</a>"
 	. += "<a href='?src=\ref[src];blood_reset=1'>R</a><br>"
@@ -177,7 +177,7 @@
 			pref.blood_color = "#A10808"
 		return TOPIC_REFRESH
 
-	else if(href_list["clicked_pos_trait"])
+/*	else if(href_list["clicked_pos_trait"])
 		var/datum/trait/trait = text2path(href_list["clicked_pos_trait"])
 		var/choice = alert("Remove [initial(trait.name)] and regain [initial(trait.cost)] points?","Remove Trait","Remove","Cancel")
 		if(choice == "Remove")
@@ -275,7 +275,7 @@
 				return TOPIC_REFRESH
 
 			mylist += path
-			return TOPIC_REFRESH
+			return TOPIC_REFRESH*/
 
 	return ..()
 

@@ -26,12 +26,12 @@
 	health_hud_intensity = 2
 	num_alternate_languages = 3
 
-	spawn_flags = SPECIES_CAN_JOIN
+	spawn_flags = SPECIES_IS_RESTRICTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	var/list/traits = list()
 
-	has_limbs = list(
+/*	has_limbs = list(
 		BP_TORSO =  list("path" = /obj/item/organ/external/chest, "descriptor" = "torso"),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin, "descriptor" = "groin"),
 		BP_HEAD =   list("path" = /obj/item/organ/external/head, "descriptor" = "head"),
@@ -43,7 +43,7 @@
 		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right, "descriptor" = "right hand"),
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot, "descriptor" = "left foot"),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right, "descriptor" = "right foot")
-		)
+		)*/
 
 /datum/species/custom/get_bodytype()
 	return base_species
@@ -89,11 +89,11 @@
 	new_copy.has_floating_eyes = has_floating_eyes
 
 	//If you had traits, apply them
-	if(new_copy.traits)
+/*	if(new_copy.traits)
 		for(var/trait in new_copy.traits)
 			var/datum/trait/T = all_traits[trait]
 			T.apply(new_copy,H)
-
+*/
 	//Set up a mob
 	H.species = new_copy
 

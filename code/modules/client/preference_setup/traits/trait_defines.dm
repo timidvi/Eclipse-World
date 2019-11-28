@@ -71,7 +71,7 @@
 	desc = "You're rather inexperienced with guns, you've never used one in your life, or you're just really rusty.  \
 	Regardless, you find it quite difficult to land shots where you wanted them to go."
 	modifier_type = /datum/modifier/trait/inaccurate
-
+/*
 /datum/trait/modifier/physical/shorter
 	name = "Shorter"
 	modifier_type = /datum/modifier/trait/shorter
@@ -131,7 +131,7 @@
 	if(setup.is_FBP())
 		return "Full Body Prosthetics cannot gain or lose weight."
 	return ..()
-
+*/
 // These two traits might be borderline, feel free to remove if they get abused.
 /datum/trait/modifier/physical/high_metabolism
 	name = "High Metabolism"
