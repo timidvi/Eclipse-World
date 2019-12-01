@@ -248,11 +248,11 @@
 	color_mult = 1
 //	inherent_verbs = list(/mob/living/proc/shred_limb)
 
-	blurb = "Vulpkanin are a species of sharp-witted canine-pideds residing on the planet Altam just barely within the \
-	dual-star Vazzend system. Their politically de-centralized society and independent natures have led them to become a species and \
-	culture both feared and respected for their scientific breakthroughs. Discovery, loyalty, and utilitarianism dominates their lifestyles \
-	to the degree it can cause conflict with more rigorous and strict authorities. They speak a guttural language known as 'Canilunzt' \
-    which has a heavy emphasis on utilizing tail positioning and ear twitches to communicate intent."
+	blurb = "Vulpkanin (Commonly called Vulps or Vulpa for short) are a race of Canids from the planet of Altam in the Binary Vazzend system. \
+	Vulpkanin have a long history of religious and philosophical conflicts, ended by the current government the Vulpkanin nation,\
+	 an isolationist nation led by the ideas of utilitarianism with harsh criminal policies,\
+	including the generational exile of criminal and dissidents. However, a close working relationship with NanoTrasen means that while most Vulp characters are descendants or exiles\
+	themselves from Vulpkanin Space, some characters are citizens of the Vulp nation."
 
 	primitive_form = "Wolpin"
 

@@ -1144,8 +1144,8 @@ window "mainwindow"
 		background-color = #2d1d34
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
-		title = "World Server 13"
-		icon = 'icons\\ss13_64.png'
+		title = "Eclipse World"
+		icon = 'icons\\eclipse_logo_small.png'
 		macro = "macro"
 		menu = "menu"
 	elem "loocbutton"
