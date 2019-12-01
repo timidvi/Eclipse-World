@@ -1,3 +1,4 @@
+PREPPING PULL REQ, DELETE LINE WHEN MODIFIED
 var/global/list/robot_modules = list(
 	"Standard"		= /obj/item/weapon/robot_module/robot/standard,
 	"Service" 		= /obj/item/weapon/robot_module/robot/clerical/butler,
